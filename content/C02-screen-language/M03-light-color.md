@@ -72,6 +72,8 @@ See the diagram. Real scenes often break this pattern, but the vocabulary stays 
 - **Soft light:** large source (overcast sky, window with curtain). Soft shadows.
 - **Direction:** front (flat), side (shape, drama), back (silhouette, rim), top (harsh, interrogation), under (horror).
 
+![Hard and soft light, then five light directions; the orange dot is the source](fig:light-quality.svg)
+
 ### Color temperature
 | Source | Approx. kelvin | Feeling |
 |---|---|---|
@@ -84,14 +86,22 @@ See the diagram. Real scenes often break this pattern, but the vocabulary stays 
 
 Mixed temperatures create meaning: warm window inside, cool street outside = safety vs danger.
 
+![Approximate color temperature of common sources](fig:color-temperature.svg)
+
 ### Exposure and dynamic range
 A camera records a limited range from dark to bright: the **dynamic range**. Bright areas beyond it **clip** to pure white (a window, the sky); dark areas beyond it crush to black. Cinematographers expose for the important area (usually the faces) and accept clipping elsewhere, or add light to the dark side. Generated video imitates this: "bright window behind, face in shadow" gives a silhouette unless you ask for fill on the face. For HDR delivery (C09·M04), highlights can be brighter, but faces stay in the normal range.
+
+![Expose for the face; what falls outside the recorded range clips or crushes](fig:dynamic-range.svg)
 
 ### Light continuity
 In one scene, the light must come from the same direction in every shot. If the window is on the left in the wide shot, it must light the left side of the face in the close-up. Generated shots break this often, because each shot is generated separately. Write the light direction relative to the room ("window on the east wall, frame left in the master") in the scene bible, and repeat it in every prompt of the scene. Check it in the review of every new shot (C02·M04).
 
+![The window side in the wide shot must be the lit side in the close-up](fig:light-continuity.svg)
+
 ### Atmosphere
 Haze, smoke, rain, and dust make light visible: beams, halos, and depth (far objects look lighter). A little haze is one of the easiest ways to make a generated frame look "cinematic", because it adds depth and softens contrast in the background. Too much makes everything grey.
+
+![Haze adds beams and depth; too much makes everything grey](fig:atmosphere.svg)
 
 ### Palette and contrast
 Define for each project:
@@ -102,8 +112,12 @@ Define for each project:
 
 This is the base of your look bible (C04·M04) and your grade (C09).
 
+![The four palette decisions for a project](fig:palette.svg)
+
 ### Skin tones
 Viewers forgive many color changes, but not wrong skin. Keep skin natural under strong looks: in a teal-and-orange grade, skin stays in the warm range, and only the background goes teal. Check skin on a vectorscope (C09·M01): skin of every color falls near one line, the skin-tone line.
+
+![A vectorscope: hue is the angle, saturation the distance from the centre](fig:vectorscope.svg)
 
 ### Light in prompts
 Template: `[quality] [source] from [direction], [color/temperature], [contrast], [practicals], [atmosphere]`

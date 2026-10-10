@@ -67,8 +67,12 @@ Draw an imaginary line through two people who talk (or along a direction of trav
 - A character who moves left to right keeps that direction until a visible turn.
 - In dialogue, person 1 looks frame right; person 2 looks frame left. Their **eyelines** meet.
 
+![Keep screen direction across the cut; in dialogue the eyelines meet](fig:eyeline.svg)
+
 ### The 30-degree rule and size steps
 Between two shots of the same subject, change the camera angle by at least 30°, or the shot size by at least one step (for example MS to CU). A smaller change looks like a mistake: a jump cut that you did not want. The same applies to generated shots. Two takes of the same prompt with a slightly different framing do not cut together. Choose one, or make the second one clearly closer or from a different angle.
+
+![Change the angle by at least 30°, or the size by at least one step](fig:rule-30.svg)
 
 ### Cut types
 - **Cut on action:** cut during a movement (a door opens, a hand reaches). The movement hides the cut.
@@ -78,11 +82,17 @@ Between two shots of the same subject, change the camera angle by at least 30°,
 - **Jump cut:** a cut inside the same shot with a time jump. Energy; common in creator videos.
 - **Cutaway / insert:** a detail shot. It also hides a continuity problem.
 
+![J-cut and L-cut: the sound cut and the picture cut happen at different times](fig:j-l-cuts.svg)
+
 ### Murch's rule of six
 Walter Murch ranks what makes a good cut: emotion (51%), story (23%), rhythm (10%), eye trace (7%), 2D plane (5%), 3D space (4%). Emotion first. A small continuity error is fine if the emotion is right.
 
+![Murch's rule of six: what matters most at a cut](fig:murch-six.svg)
+
 ### Rhythm and pace
 Shot length makes rhythm. Short shots = energy. Long shots = calm or tension. Cut when the shot has given its information or its emotion, not when the clip ends. Social video in 2026 often cuts every 1–3 s at the start (the hook) and then slows. Vary length; a constant length feels mechanical.
+
+![Varied shot length, with a fast hook, against a mechanical constant length](fig:rhythm.svg)
 
 ### What to watch at a cut
 At every cut, check the position of the subject in the frame (eye trace: the eye should find the subject quickly after the cut). Check the direction of movement, the eyeline, the light side, and wardrobe, props, and hair. Check the sound too: a room tone that changes at the cut is very noticeable (C08). Review cuts at full speed first, as a viewer, then frame by frame. Many small errors are invisible at full speed. Fix only what a viewer would notice, and spend the saved time on the errors that break the emotion (Murch's rule).
@@ -94,6 +104,8 @@ Every generation is independent. The model does not know the previous shot unles
 - Direction words: "walks from left to right".
 - Plan the cut point. Generate 1 s more before and after it ("handles").
 - Use first/last frames to join shots exactly (C05·M03).
+
+![Handles: generate about 1 s more before and after the planned cut](fig:handles.svg)
 
 ## Tool walkthrough
 

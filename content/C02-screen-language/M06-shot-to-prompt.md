@@ -74,6 +74,8 @@ Use one order for every shot:
 ### Fixed descriptors
 Write each character, product, and location once in a "bible" (C04). Copy the same words into every prompt. Do not paraphrase: "olive raincoat" in one prompt and "green coat" in the next are two different coats for the model. Combine words with reference images. The words then confirm what the image shows, and add what it cannot show (the scar on the other side of the face, the brand of the watch).
 
+![Same words, same coat; a paraphrase is a different coat for the model](fig:fixed-descriptors.svg)
+
 ### Structured (JSON) prompts
 For complex shots, a JSON structure separates the elements:
 ```json
@@ -96,8 +98,12 @@ Models react differently to the same prompt. Some prefer short, simple prompts; 
 ### Negative instructions
 Saying what you do not want often adds it: "no text on the wall" can put text on the wall, because the words "text" and "wall" are now in the prompt. Describe what you want instead ("a plain, empty concrete wall"). Use a real negative prompt only where the model supports it (C01·M05).
 
+![Describe what you want, not what you do not want](fig:negative-instructions.svg)
+
 ### One shot, one action
 A generated clip of 5–10 s can hold one clear action and one camera move. "She opens the door, walks in, sees the letter, picks it up, and cries" is five actions; the model will rush, skip, or merge them. Split them into shots, each with one action and a clear start and end state. Timing words help inside one action: "after a pause", "slowly, over the whole shot".
+
+![One shot, one action](fig:one-action.svg)
 
 ### Dialogue in prompts
 Put dialogue in quotes, name the speaker, and give the delivery: `Mara (quietly, tired): "It was raining in the photo."` Keep lines short (one sentence per 3–4 s). For exact lines and voices, generate the voice separately and use audio-to-video or lip sync (C06).
@@ -112,6 +118,8 @@ Decide:
 - **Fix in post:** small defect (C09, C10).
 - **Regenerate:** fails a core element (wrong action, wrong identity).
 - **Change approach:** fails 3 times → use a reference, a first frame, a different model, or split the shot.
+
+![Review each output against the spec, then decide](fig:review-decision.svg)
 
 ## Tool walkthrough
 

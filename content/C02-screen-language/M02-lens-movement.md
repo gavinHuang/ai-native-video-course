@@ -75,8 +75,12 @@ Focal length (in mm, for a full-frame camera) changes perspective.
 
 Video models understand these numbers. "24 mm" and "135 mm" give visibly different perspective.
 
+![Same face size, four lenses: a longer lens shows less background, larger and softer](fig:focal-length.svg)
+
 ### Depth of field
 **Depth of field** (DOF) is the zone that is sharp. Shallow DOF (wide aperture, long lens, close subject) isolates the subject and guides the eye. Deep DOF (small aperture, wide lens) shows the whole scene. A **rack focus** moves focus from one subject to another during the shot. It moves attention. Models can do rack focus when you name the start and end subject.
+
+![Shallow and deep depth of field, and a rack focus from the face to the background](fig:depth-of-field.svg)
 
 ### Camera movement
 See the diagram. The rule: every move needs a **motivation**. Good motivations:
@@ -86,16 +90,24 @@ See the diagram. The rule: every move needs a **motivation**. Good motivations:
 
 A move without motivation feels like a demo reel. Also decide speed (slow, steady, fast) and direction (left, right, toward, away).
 
+![The main camera moves; the orange arrow is the path of the camera](fig:camera-moves.svg)
+
 ### Stabilized vs handheld
 - Gimbal or dolly: smooth, controlled, "cinematic".
 - Handheld: shake, breath, urgency. Real documentary feeling.
 - Locked-off (tripod): stillness. Lets the action speak. Often the best choice for AI shots, because fewer things move.
 
+![The path of the frame centre over a few seconds](fig:stabilization.svg)
+
 ### Frame rate, shutter, and motion blur
 Film and most drama use **24 fps**; TV and online video also use 25 or 30 fps; sport and games use 50–60 fps. Each frame is exposed for a time set by the **shutter**. The common rule is a 180° shutter: exposure = half the frame time (1/48 s at 24 fps). It gives natural motion blur. A short shutter (1/500 s) gives sharp, stuttering frames: tense, "war footage". A long shutter gives smeared, dreamy motion. Generated video imitates this blur from its training data; ask for "natural motion blur" or "crisp, fast shutter" when it matters. Slow motion is filmed at a high frame rate and played at 24 fps.
 
+![One frame of a moving ball at 24 fps: the shutter time sets the blur](fig:shutter.svg)
+
 ### Parallax and speed
 A camera that moves sideways makes near objects pass faster than far ones. This is **parallax**, and it is the strongest cue of depth. A slow lateral move with a foreground object (a pillar, a plant) makes a flat scene deep. Fast moves through complex scenes are hard for models: the background can warp. Keep moves slow and the scene simple when quality matters, and add speed in the edit (C02·M04).
+
+![Parallax: in a sideways move, near objects cross the frame faster than far ones](fig:parallax.svg)
 
 ### Moves that are hard for models
 - **Long orbits** around a complex subject: the back of the subject and the background must be invented, and they warp.
@@ -103,6 +115,8 @@ A camera that moves sideways makes near objects pass faster than far ones. This 
 - **Combined moves** (crane up while panning and pushing in): choose one.
 - **Fast whip pans:** the blur hides the cut; generate two shots and join them with a whip-pan transition in the edit instead.
 For these, use first and last frames or a 3D layout (C05·M05).
+
+![Moves that make the model invent space it has not seen](fig:hard-moves.svg)
 
 ### Camera language in prompts
 Write the camera like a camera operator:

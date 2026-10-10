@@ -70,10 +70,14 @@ On social platforms, the viewer decides in 1–3 seconds. A hook creates a quest
 - **Result first:** show the end, then "here is how".
 - **Pattern break:** a sound, a cut, or a movement that the viewer does not expect.
 
+![Four kinds of hook, each as a first frame](fig:hook-types.svg)
+
 Avoid: logos, slow fades, greetings, and "in this video we will…". Test hooks: show the first 3 seconds of 3 versions to 5 people and ask what they expect next. If they cannot say, the hook asks no question.
 
 ### The base shape
 Every story has: a situation → a change → tension → a release. Short formats compress it, but they do not remove a step.
+
+![Tension over time: the turn comes at about two thirds](fig:story-shape.svg)
 
 ### Formats
 - **15 s:** one idea, one turn. Example: problem (3 s) → product acts (8 s) → result + brand (4 s).
@@ -81,8 +85,12 @@ Every story has: a situation → a change → tension → a release. Short forma
 - **3 min:** three acts. Setup (who and what they want), conflict (obstacles, rising stakes), resolution.
 - **10 min:** chapters. Promise in the first 30 s. Each chapter opens a small question and answers it, and opens the next one (open loops).
 
+![Beats by format, each row scaled to the same width](fig:formats.svg)
+
 ### Setup and payoff
 Show an element early (a broken watch). Return to it with meaning at the end (the watch now works: time has healed). Payoffs give satisfaction. They also guide what you must keep consistent in AI shots.
+
+![Setup and payoff: the same element returns with new meaning](fig:setup-payoff.svg)
 
 ### Point of view
 Decide whose story it is. Show their face more, put the camera at their eye level, give them the last shot. Show what they see (point-of-view shots) and how they react to it. A viewer follows the person whose reactions they see most. In an ad, the point of view is often the customer's, not the product's.
@@ -90,11 +98,15 @@ Decide whose story it is. Show their face more, put the camera at their eye leve
 ### Want, obstacle, change
 A character becomes interesting when they **want** something, something **stops** them, and they **change** (or fail to change). Even a 15 s ad has this: the user wants clean shoes, rain is the obstacle, the product is the change. Write the want and the obstacle in one sentence before any shot. If you cannot, the video will be a list of images.
 
+![Want, obstacle, change in a 15 s ad](fig:want-obstacle-change.svg)
+
 ### Show, do not tell
 Prefer an action that shows a fact over a line that tells it. Not "I am exhausted", but a nurse who falls asleep standing at the coffee machine. Visual storytelling also travels across languages (C15·M02) and needs fewer subtitles. Generated video is good at strong single images, so plan the story in images.
 
 ### Escalation and the turn
 Each beat must raise the stakes or change the situation; if two beats do the same job, cut one. The **turn** is the moment when the situation reverses (the plan fails, the truth appears). In a 60 s piece it comes at about two thirds. Put your best shot at the turn, not at the start only.
+
+![Each beat raises the stakes; a beat that repeats a job is cut](fig:escalation.svg)
 
 ### Endings and calls to action
 End on a strong image, not on a fade into a logo. In ads, the call to action is one clear step ("Try it free today"), shown and said. In stories, the last shot answers the hook's question or shows the change of the character.
