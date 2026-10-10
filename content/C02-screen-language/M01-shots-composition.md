@@ -117,14 +117,22 @@ Shot size says how close; these names say what is in the frame:
 - **Reaction shot:** a listener's face. Reactions often carry the emotion of a dialogue more than the speaker.
 Plan inserts, cutaways, and reactions on purpose. In AI production they are cheap to make and they solve many editing problems (C02·M04).
 
+![Shots named by what is in the frame](fig:shots-content.svg)
+
 ### Where the viewer looks
 The eye goes first to faces (especially eyes), then to the brightest area, the area of highest contrast, sharp focus, warm colors, and movement. Use this to lead attention: put the important thing where these meet, and keep competing bright or moving areas out of the frame. When you review a generated frame, ask: where did my eye go first? If it is not the subject, change the light, the focus, or the composition.
+
+![In each frame, the marked element pulls the eye first](fig:viewer-looks.svg)
 
 ### Aspect ratio
 The frame shape changes composition. 16:9 for YouTube and TV; 9:16 for Shorts, Reels, TikTok; 2.39:1 for "cinema" look; 1:1 or 4:5 for some feeds. Compose for the delivery ratio from the start. A model that generates 16:9 and is then cropped to 9:16 loses the composition.
 
+![Common aspect ratios, and what a 16:9 to 9:16 crop does](fig:aspect-ratios.svg)
+
 ### Safe areas
 Platforms put buttons, captions, and profile names over the picture, mostly at the bottom and the right side of vertical video. Keep faces, text, and products inside the safe area of the delivery format (C10·M03 gives the exact margins). For TV, keep text inside the title-safe area (about 90 % of the frame).
+
+![Safe areas for vertical video and TV](fig:safe-areas.svg)
 
 ### Why this matters for AI
 A prompt without shot size and angle gives the model's default: usually a centered medium shot at eye level. Every professional shot list names size, angle, and composition. Your prompts must too.

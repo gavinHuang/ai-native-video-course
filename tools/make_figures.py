@@ -155,6 +155,159 @@ def composition():
     return panel_strip(panels, "cmp", "Composition rules").replace('">', '">' + arrow, 1)
 
 
+def shots_by_content():
+    """Shot names by what is in the frame, same panel style as shot_sizes."""
+    w, h = 112, 63
+    L = 'class="f-line" stroke-width="2"'
+
+    def single(x, y):
+        return person(x + w/2, y + h*0.12, h*1.6)
+
+    def two(x, y):
+        return person(x + w*0.32, y + h*0.14, h*1.5) + person(x + w*0.68, y + h*0.14, h*1.5)
+
+    def group(x, y):
+        return "".join(person(x + w*f, y + h*t, h*0.7) for f, t in
+                       [(0.18, 0.28), (0.38, 0.22), (0.62, 0.22), (0.82, 0.28), (0.5, 0.36)])
+
+    def insert(x, y):  # a finger on a phone screen
+        return (f'<rect class="f-fill" x="{x+w*0.3}" y="{y+6}" width="{w*0.4}" height="{h+10}" rx="6" style="stroke:var(--ink)" stroke-width="2"/>'
+                + "".join(f'<rect class="f-soft" x="{x+w*0.36}" y="{y+14+k*11}" width="{w*0.28}" height="7" rx="2"/>' for k in range(3))
+                + f'<line x1="{x+w}" y1="{y+h+4}" x2="{x+w*0.56}" y2="{y+h*0.62}" style="stroke:var(--ink)" stroke-width="11" stroke-linecap="round"/>'
+                + f'<line x1="{x+w}" y1="{y+h+4}" x2="{x+w*0.56}" y2="{y+h*0.62}" style="stroke:var(--surface)" stroke-width="8" stroke-linecap="round"/>')
+
+    def cutaway(x, y):  # a wall clock
+        cx, cy = x + w/2, y + h/2
+        ticks = "".join(f'<line class="f-line" x1="{cx+20*math.cos(a):.1f}" y1="{cy+20*math.sin(a):.1f}" x2="{cx+24*math.cos(a):.1f}" y2="{cy+24*math.sin(a):.1f}" stroke-width="1.5"/>'
+                        for a in [k*math.pi/6 for k in range(12)])
+        return (f'<circle class="f-fill" cx="{cx}" cy="{cy}" r="26" style="stroke:var(--ink)" stroke-width="2"/>' + ticks
+                + f'<path {L} d="M{cx},{cy} L{cx},{cy-17} M{cx},{cy} L{cx+12},{cy+5}"/>')
+
+    def reaction(x, y):  # close-up of a listener, surprised
+        cx, cy = x + w/2, y + h*0.5
+        return (f'<circle class="f-soft" cx="{cx}" cy="{cy}" r="27"/>'
+                f'<circle cx="{cx-9}" cy="{cy-5}" r="2.5" style="fill:var(--ink)"/><circle cx="{cx+9}" cy="{cy-5}" r="2.5" style="fill:var(--ink)"/>'
+                f'<path class="f-line" stroke-width="1.5" d="M{cx-14},{cy-13} Q{cx-9},{cy-17} {cx-4},{cy-13} M{cx+4},{cy-13} Q{cx+9},{cy-17} {cx+14},{cy-13}"/>'
+                f'<ellipse class="f-line" cx="{cx}" cy="{cy+10}" rx="4" ry="5" stroke-width="1.5"/>')
+
+    panels = [("Single", single), ("Two-shot", two), ("Group", group), ("Insert", insert),
+              ("Cutaway", cutaway), ("Reaction", reaction)]
+    return panel_strip(panels, "sbc", "Shots named by content")
+
+
+def viewer_looks():
+    """What pulls the eye first; in each frame one element wins (marked in orange)."""
+    w, h = 112, 63
+
+    def ring(cx, cy, r):
+        return f'<circle cx="{cx}" cy="{cy}" r="{r}" style="stroke:var(--mark);fill:none" stroke-width="1.5" stroke-dasharray="3 2"/>'
+
+    def boxes(x, y, skip=None, style='style="fill:var(--muted);opacity:.35"'):
+        spots = [(0.18, 0.35), (0.42, 0.62), (0.7, 0.3), (0.85, 0.68)]
+        return "".join(f'<rect x="{x+w*a-8}" y="{y+h*b-8}" width="16" height="16" rx="3" {style}/>'
+                       for i, (a, b) in enumerate(spots) if i != skip)
+
+    def face(x, y):
+        cx, cy = x + w*0.7, y + h*0.3
+        return (boxes(x, y, skip=2) + f'<circle class="f-soft" cx="{cx}" cy="{cy}" r="10"/>'
+                f'<circle cx="{cx-3.5}" cy="{cy-1}" r="1.4" style="fill:var(--ink)"/><circle cx="{cx+3.5}" cy="{cy-1}" r="1.4" style="fill:var(--ink)"/>'
+                + ring(cx, cy, 15))
+
+    def bright(x, y):  # a "photo": fixed dark tones so it reads the same in both themes
+        cx, cy = x + w*0.42, y + h*0.62
+        return (f'<rect x="{x}" y="{y}" width="{w}" height="{h}" style="fill:#3a3f44"/>'
+                + boxes(x, y, skip=1, style='style="fill:#5a6168"') + f'<circle cx="{cx}" cy="{cy}" r="9" style="fill:#fff6d8"/>' + ring(cx, cy, 15))
+
+    def contrast(x, y):
+        cx, cy = x + w*0.18, y + h*0.35
+        return (f'<rect x="{x}" y="{y}" width="{w}" height="{h}" style="fill:#c9ccd0"/>'
+                + boxes(x, y, skip=0, style='style="fill:#b3b7bc"') + f'<rect x="{cx-8}" y="{cy-8}" width="16" height="16" rx="3" style="fill:#16191c"/>' + ring(cx, cy, 15))
+
+    def focus(x, y):
+        cx, cy = x + w*0.85, y + h*0.68
+        soft = boxes(x, y, skip=3, style='style="fill:var(--ink);opacity:.45"')
+        return (f'<g filter="url(#vl-blur)">{soft}</g>'
+                f'<rect x="{cx-8}" y="{cy-8}" width="16" height="16" rx="3" style="fill:var(--ink)"/>' + ring(cx, cy, 15))
+
+    def warm(x, y):
+        cx, cy = x + w*0.42, y + h*0.62
+        return (boxes(x, y, skip=1, style='style="fill:#6f8fa8;opacity:.6"')
+                + f'<rect x="{cx-8}" y="{cy-8}" width="16" height="16" rx="3" style="fill:var(--mark)"/>' + ring(cx, cy, 15))
+
+    def movement(x, y):
+        cx, cy = x + w*0.7, y + h*0.3
+        trail = "".join(f'<line x1="{cx-14-k*7}" y1="{cy-4+k*4}" x2="{cx-24-k*7}" y2="{cy-4+k*4}" style="stroke:var(--ink)" stroke-width="1.2"/>' for k in range(3))
+        return (boxes(x, y, skip=2) + trail + f'<rect x="{cx-8}" y="{cy-8}" width="16" height="16" rx="3" style="fill:var(--muted)"/>' + ring(cx, cy, 15))
+
+    panels = [("Face, eyes", face), ("Brightest", bright), ("Contrast", contrast), ("Sharp focus", focus),
+              ("Warm color", warm), ("Movement", movement)]
+    blur = '<defs><filter id="vl-blur"><feGaussianBlur stdDeviation="2.2"/></filter></defs>'
+    return panel_strip(panels, "vl", "What the eye goes to first").replace('">', '">' + blur, 1)
+
+
+def aspect_ratios():
+    """Common delivery ratios at the same height, then what a 16:9 to 9:16 crop does."""
+    h, y, gap = 72, 20, 14
+    ratios = [("16:9", 16/9, "YouTube, TV"), ("9:16", 9/16, "Shorts, Reels"), ("2.39:1", 2.39, "cinema"),
+              ("1:1", 1, "feeds"), ("4:5", 4/5, "feeds")]
+    p, x = [], 10
+    for i, (name, r, use) in enumerate(ratios):
+        w = h * r
+        p.append(f'<rect class="f-fill" x="{x}" y="{y}" width="{w:.1f}" height="{h}" style="stroke:var(--ink)" stroke-width="1.5"/>')
+        p.append(f'<clipPath id="ar{i}"><rect x="{x}" y="{y}" width="{w:.1f}" height="{h}"/></clipPath>')
+        p.append(f'<g clip-path="url(#ar{i})">{person(x + w/2, y + h*0.14, h*1.4)}</g>')  # same subject, same size
+        p.append(f'<text class="f-text" x="{x + w/2:.1f}" y="{y + h + 18}" text-anchor="middle" font-weight="600">{name}</text>')
+        p.append(f'<text class="f-mute" x="{x + w/2:.1f}" y="{y + h + 32}" text-anchor="middle">{use}</text>')
+        x += w + gap
+    # the crop: a 16:9 two-shot with the centre 9:16 window that a vertical edit keeps
+    x += 16
+    w = h * 16/9
+    cw = h * 9/16
+    p.append(f'<rect class="f-fill" x="{x}" y="{y}" width="{w:.1f}" height="{h}" style="stroke:var(--ink)" stroke-width="1.5"/>')
+    p.append(f'<clipPath id="ar-c"><rect x="{x}" y="{y}" width="{w:.1f}" height="{h}"/></clipPath>')
+    p.append(f'<g clip-path="url(#ar-c)">{person(x + w*0.22, y + h*0.14, h*1.4)}{person(x + w*0.78, y + h*0.14, h*1.4)}</g>')
+    p.append(f'<rect x="{x}" y="{y}" width="{(w-cw)/2:.1f}" height="{h}" style="fill:var(--ink);opacity:.18"/>')
+    p.append(f'<rect x="{x + (w+cw)/2:.1f}" y="{y}" width="{(w-cw)/2:.1f}" height="{h}" style="fill:var(--ink);opacity:.18"/>')
+    p.append(f'<rect x="{x + (w-cw)/2:.1f}" y="{y}" width="{cw:.1f}" height="{h}" style="stroke:var(--bad);fill:none" stroke-width="2" stroke-dasharray="4 3"/>')
+    p.append(f'<text class="f-text" x="{x + w/2:.1f}" y="{y + h + 18}" text-anchor="middle" font-weight="600">16:9 cropped to 9:16</text>')
+    p.append(f'<text class="f-mute" x="{x + w/2:.1f}" y="{y + h + 32}" text-anchor="middle">both people cut out</text>')
+    W = x + w + 30
+    return f'<svg viewBox="0 0 {W:.0f} 130" role="img" aria-label="Aspect ratios">{"".join(p)}</svg>'
+
+
+def safe_areas():
+    """Vertical video: where the platform interface covers the picture; TV: title-safe area."""
+    p = ['<svg viewBox="0 0 520 300" role="img" aria-label="Safe areas for vertical video and TV">']
+    cover = 'style="fill:var(--mark);opacity:.22"'
+    # 9:16 phone frame
+    x, y, w, h = 40, 16, 117, 208
+    p.append(f'<rect class="f-fill" x="{x}" y="{y}" width="{w}" height="{h}" rx="8" style="stroke:var(--ink)" stroke-width="2"/>')
+    p.append(f'<rect x="{x}" y="{y + h*0.78}" width="{w}" height="{h*0.22}" {cover}/>')
+    p.append(f'<rect x="{x + w*0.8}" y="{y + h*0.42}" width="{w*0.2}" height="{h*0.36}" {cover}/>')
+    p.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h*0.08}" {cover}/>')
+    for k in range(4):
+        p.append(f'<circle cx="{x + w*0.9}" cy="{y + h*0.47 + k*17}" r="5" style="fill:var(--mark);opacity:.7"/>')
+    p.append(f'<rect class="f-soft" x="{x + 8}" y="{y + h*0.83}" width="{w*0.55}" height="6" rx="2"/><rect class="f-soft" x="{x + 8}" y="{y + h*0.88}" width="{w*0.4}" height="6" rx="2"/>')
+    p.append(f'<rect x="{x + 6}" y="{y + h*0.1}" width="{w*0.72}" height="{h*0.66}" style="stroke:var(--accent);fill:none" stroke-width="1.5" stroke-dasharray="4 3"/>')
+    p.append(person(x + w*0.42, y + h*0.2, h*0.5))
+    p.append(f'<text class="f-text" x="{x + w/2}" y="{y + h + 20}" text-anchor="middle" font-weight="600">9:16 vertical</text>')
+    # legend
+    lx = 190
+    p.append(f'<rect x="{lx}" y="40" width="14" height="14" {cover}/><text class="f-text" x="{lx + 22}" y="51">covered by buttons, captions, names</text>')
+    p.append(f'<rect x="{lx}" y="64" width="14" height="14" style="stroke:var(--accent);fill:none" stroke-dasharray="4 3"/><text class="f-text" x="{lx + 22}" y="75">safe area: faces, text, product</text>')
+    # 16:9 TV with title-safe at 90 %
+    x, y, w = 190, 100, 290
+    h = w * 9/16
+    p.append(f'<rect class="f-fill" x="{x}" y="{y}" width="{w}" height="{h:.1f}" style="stroke:var(--ink)" stroke-width="2"/>')
+    p.append(f'<rect x="{x + w*0.05}" y="{y + h*0.05:.1f}" width="{w*0.9}" height="{h*0.9:.1f}" style="stroke:var(--accent);fill:none" stroke-width="1.5" stroke-dasharray="4 3"/>')
+    p.append(f'<text class="f-mute" x="{x + w*0.05 + 6}" y="{y + h*0.05 + 14:.1f}">title-safe ≈ 90 %</text>')
+    p.append(f'<rect class="f-soft" x="{x + w*0.08}" y="{y + h*0.74:.1f}" width="{w*0.42}" height="12" rx="2"/>')
+    p.append(person(x + w*0.68, y + h*0.2, h*0.65))
+    p.append(f'<text class="f-text" x="{x + w/2}" y="{y + h + 20:.1f}" text-anchor="middle" font-weight="600">16:9 TV</text>')
+    p.append("</svg>")
+    return "".join(p)
+
+
 def three_point():
     p = ['<svg viewBox="0 0 520 300" role="img" aria-label="Three-point lighting, top view">',
          '<text class="f-mute" x="16" y="22">TOP VIEW</text>']
@@ -227,7 +380,8 @@ def local_cloud():
     return "".join(p)
 
 
-FIGS = {"shot-sizes.svg": shot_sizes, "camera-angles.svg": camera_angles, "composition.svg": composition, "three-point.svg": three_point, "rule-180.svg": rule_180,
+FIGS = {"shot-sizes.svg": shot_sizes, "camera-angles.svg": camera_angles, "composition.svg": composition, "shots-content.svg": shots_by_content, "viewer-looks.svg": viewer_looks,
+        "aspect-ratios.svg": aspect_ratios, "safe-areas.svg": safe_areas, "three-point.svg": three_point, "rule-180.svg": rule_180,
         "denoise.svg": denoise, "local-cloud.svg": local_cloud}
 
 if __name__ == "__main__":
