@@ -96,6 +96,8 @@ Shot size decides what the viewer sees, and so what the viewer thinks is importa
 - **Over-the-shoulder (OTS):** dialogue; connects two people.
 - **Point of view (POV):** we see what the character sees.
 
+![Camera heights and angles, as seen in the frame](fig:camera-angles.svg)
+
 ### Composition
 - **Rule of thirds:** place the subject or eyes on the lines that divide the frame in thirds.
 - **Lead room:** leave space in the direction of a look or a movement.

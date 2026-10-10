@@ -38,6 +38,65 @@ def shot_sizes():
     return f'<svg viewBox="0 0 {W} 112" role="img" aria-label="Six shot sizes">{"".join(parts)}</svg>'
 
 
+def camera_angles():
+    """What the frame looks like from each camera height/angle, same panel style as shot_sizes."""
+    w, h, gap = 112, 63, 12
+    L = 'class="f-line" stroke-width="2"'
+
+    def eye(x, y):
+        return person(x + w/2, y + h*0.12, h*1.6) + f'<line {L} x1="{x}" y1="{y+h*0.3}" x2="{x+w}" y2="{y+h*0.3}" stroke-width="1" stroke-dasharray="3 3"/>'
+
+    def low(x, y):  # looking up: big legs, small head, horizon near the bottom
+        cx = x + w/2
+        return (f'<line {L} x1="{x}" y1="{y+h*0.92}" x2="{x+w}" y2="{y+h*0.92}" stroke-width="1"/>'
+                f'<circle class="f-soft" cx="{cx}" cy="{y+h*0.14}" r="5"/>'
+                f'<path {L} d="M{cx},{y+h*0.22} L{cx},{y+h*0.55} M{cx-12},{y+h*0.34} L{cx+12},{y+h*0.34} '
+                f'M{cx},{y+h*0.55} L{cx-22},{y+h} M{cx},{y+h*0.55} L{cx+22},{y+h}" stroke-width="3"/>')
+
+    def high(x, y):  # looking down: big head, small feet, floor fills the frame
+        cx = x + w/2
+        grid = "".join(f'<line class="f-line" x1="{x+k*w/6}" y1="{y}" x2="{x+k*w/6}" y2="{y+h}" stroke-width=".5" style="opacity:.35"/>' for k in range(1, 6))
+        return (grid + f'<path {L} d="M{cx},{y+h*0.42} L{cx},{y+h*0.72} M{cx-9},{y+h*0.5} L{cx+9},{y+h*0.5} '
+                f'M{cx},{y+h*0.72} L{cx-4},{y+h*0.86} M{cx},{y+h*0.72} L{cx+4},{y+h*0.86}"/>'
+                f'<circle class="f-soft" cx="{cx}" cy="{y+h*0.28}" r="10"/>')
+
+    def overhead(x, y):  # straight down: top of head inside shoulders, tiled floor
+        cx, cy = x + w/2, y + h/2
+        grid = "".join(f'<line class="f-line" x1="{x}" y1="{y+k*h/4}" x2="{x+w}" y2="{y+k*h/4}" stroke-width=".5" style="opacity:.35"/>' for k in range(1, 4))
+        grid += "".join(f'<line class="f-line" x1="{x+k*w/7}" y1="{y}" x2="{x+k*w/7}" y2="{y+h}" stroke-width=".5" style="opacity:.35"/>' for k in range(1, 7))
+        return grid + f'<ellipse class="f-fill" cx="{cx}" cy="{cy}" rx="18" ry="8" style="stroke:var(--ink)"/><circle class="f-soft" cx="{cx}" cy="{cy}" r="7"/>'
+
+    def dutch(x, y):  # eye level, whole frame content tilted
+        return f'<g transform="rotate(-15 {x+w/2} {y+h/2})"><line {L} x1="{x-20}" y1="{y+h*0.3}" x2="{x+w+20}" y2="{y+h*0.3}" stroke-width="1" stroke-dasharray="3 3"/>{person(x + w/2, y + h*0.12, h*1.6)}</g>'
+
+    def ots(x, y):  # back of head and shoulder in the foreground, the other person facing us
+        fg = 'style="fill:var(--line);stroke:var(--ink)"'
+        return (person(x + w*0.68, y + h*0.14, h*1.5)
+                + f'<ellipse cx="{x+w*0.1}" cy="{y+h*1.08}" rx="42" ry="24" {fg}/>'
+                + f'<circle cx="{x+w*0.18}" cy="{y+h*0.45}" r="20" {fg}/>')
+
+    def pov(x, y):  # our own forearms reach in from the bottom edge toward what we look at
+        def arm(sx, ex):
+            return (f'<line x1="{sx}" y1="{y+h+4}" x2="{ex}" y2="{y+h*0.74}" style="stroke:var(--ink)" stroke-width="9" stroke-linecap="round"/>'
+                    f'<line x1="{sx}" y1="{y+h+4}" x2="{ex}" y2="{y+h*0.74}" style="stroke:var(--surface)" stroke-width="6.5" stroke-linecap="round"/>')
+        return (person(x + w/2, y + h*0.2, h*0.6)
+                + f'<line {L} x1="{x}" y1="{y+h*0.55}" x2="{x+w}" y2="{y+h*0.55}" stroke-width="1"/>'
+                + arm(x + 14, x + 38) + arm(x + w - 14, x + w - 38))
+
+    panels = [("Eye level", eye), ("Low angle", low), ("High angle", high), ("Overhead", overhead),
+              ("Dutch", dutch), ("OTS", ots), ("POV", pov)]
+    parts = []
+    for i, (name, draw) in enumerate(panels):
+        x, y = 10 + i * (w + gap), 20
+        clip = f"ca{i}"  # ids share the page with other figures
+        parts.append(f'<clipPath id="{clip}"><rect x="{x}" y="{y}" width="{w}" height="{h}"/></clipPath>')
+        parts.append(f'<rect class="f-fill" x="{x}" y="{y}" width="{w}" height="{h}" stroke-width="1" style="stroke:var(--line)"/>')
+        parts.append(f'<g clip-path="url(#{clip})">{draw(x, y)}</g>')
+        parts.append(f'<text class="f-text" x="{x + w/2}" y="{y + h + 18}" text-anchor="middle" font-weight="600">{name}</text>')
+    W = 10 + len(panels) * (w + gap)
+    return f'<svg viewBox="0 0 {W} 112" role="img" aria-label="Camera heights and angles">{"".join(parts)}</svg>'
+
+
 def three_point():
     p = ['<svg viewBox="0 0 520 300" role="img" aria-label="Three-point lighting, top view">',
          '<text class="f-mute" x="16" y="22">TOP VIEW</text>']
@@ -110,7 +169,7 @@ def local_cloud():
     return "".join(p)
 
 
-FIGS = {"shot-sizes.svg": shot_sizes, "three-point.svg": three_point, "rule-180.svg": rule_180,
+FIGS = {"shot-sizes.svg": shot_sizes, "camera-angles.svg": camera_angles, "three-point.svg": three_point, "rule-180.svg": rule_180,
         "denoise.svg": denoise, "local-cloud.svg": local_cloud}
 
 if __name__ == "__main__":
