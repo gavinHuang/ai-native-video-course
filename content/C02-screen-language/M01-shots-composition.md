@@ -107,6 +107,8 @@ Shot size decides what the viewer sees, and so what the viewer thinks is importa
 - **Symmetry:** order, control, sometimes threat.
 - **Negative space:** empty area that makes a subject feel alone or calm.
 
+![Composition rules, one frame each](fig:composition.svg)
+
 ### Shots by content
 Shot size says how close; these names say what is in the frame:
 - **Single:** one person. **Two-shot:** two people in one frame, which shows their relation. **Group shot.**

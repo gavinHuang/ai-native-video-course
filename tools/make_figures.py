@@ -40,7 +40,7 @@ def shot_sizes():
 
 def camera_angles():
     """What the frame looks like from each camera height/angle, same panel style as shot_sizes."""
-    w, h, gap = 112, 63, 12
+    w, h = 112, 63
     L = 'class="f-line" stroke-width="2"'
 
     def eye(x, y):
@@ -85,16 +85,74 @@ def camera_angles():
 
     panels = [("Eye level", eye), ("Low angle", low), ("High angle", high), ("Overhead", overhead),
               ("Dutch", dutch), ("OTS", ots), ("POV", pov)]
+    return panel_strip(panels, "ca", "Camera heights and angles")
+
+
+def panel_strip(panels, prefix, label, w=112, h=63, gap=12):
+    """A row of framed panels with a label under each; draw(x, y) fills one panel."""
     parts = []
     for i, (name, draw) in enumerate(panels):
         x, y = 10 + i * (w + gap), 20
-        clip = f"ca{i}"  # ids share the page with other figures
+        clip = f"{prefix}{i}"  # ids share the page with other figures
         parts.append(f'<clipPath id="{clip}"><rect x="{x}" y="{y}" width="{w}" height="{h}"/></clipPath>')
         parts.append(f'<rect class="f-fill" x="{x}" y="{y}" width="{w}" height="{h}" stroke-width="1" style="stroke:var(--line)"/>')
         parts.append(f'<g clip-path="url(#{clip})">{draw(x, y)}</g>')
         parts.append(f'<text class="f-text" x="{x + w/2}" y="{y + h + 18}" text-anchor="middle" font-weight="600">{name}</text>')
     W = 10 + len(panels) * (w + gap)
-    return f'<svg viewBox="0 0 {W} 112" role="img" aria-label="Camera heights and angles">{"".join(parts)}</svg>'
+    return f'<svg viewBox="0 0 {W} 112" role="img" aria-label="{label}">{"".join(parts)}</svg>'
+
+
+def composition():
+    """The composition rules, one small frame each; orange marks show the rule."""
+    w, h = 112, 63
+    L = 'class="f-line" stroke-width="2"'
+    M = 'style="stroke:var(--mark);fill:none" stroke-width="1.2"'
+
+    def thirds(x, y):
+        grid = "".join(f'<line x1="{x+k*w/3}" y1="{y}" x2="{x+k*w/3}" y2="{y+h}" {M} stroke-dasharray="3 3"/>'
+                       f'<line x1="{x}" y1="{y+k*h/3}" x2="{x+w}" y2="{y+k*h/3}" {M} stroke-dasharray="3 3"/>' for k in (1, 2))
+        return grid + person(x + w/3, y + h/3 - h*0.11*1.6*1.1, h*1.6)  # eyes on the top third line
+
+    def lead_room(x, y):  # profile looking right, with space in front of the face
+        hx, hy = x + w*0.28, y + h*0.4
+        return (f'<path {L} d="M{hx},{hy+9} L{hx},{y+h} M{hx-16},{y+h*0.78} L{hx+16},{y+h*0.78}"/>'
+                f'<circle class="f-soft" cx="{hx}" cy="{hy}" r="9"/>'
+                f'<path class="f-soft" d="M{hx+8},{hy-3} L{hx+13},{hy+1} L{hx+8},{hy+3} Z"/>'
+                f'<line x1="{hx+18}" y1="{hy}" x2="{x+w-8}" y2="{hy}" {M} stroke-dasharray="3 3" marker-end="url(#cmp-arrow)"/>')
+
+    def headroom(x, y):  # small, marked gap between head top and frame top
+        top = y + h*0.16
+        return (person(x + w/2, top, h*1.6)
+                + f'<path d="M{x+w/2+16},{y+1} L{x+w/2+16},{top} M{x+w/2+12},{y+1} L{x+w/2+20},{y+1} M{x+w/2+12},{top} L{x+w/2+20},{top}" {M}/>')
+
+    def depth(x, y):  # background hills, middle-ground person, foreground glass out of focus
+        return (f'<path class="f-line" stroke-width="1" style="opacity:.5" d="M{x},{y+h*0.5} L{x+w*0.3},{y+h*0.3} L{x+w*0.55},{y+h*0.48} L{x+w*0.8},{y+h*0.25} L{x+w},{y+h*0.42}"/>'
+                + person(x + w*0.6, y + h*0.32, h*0.75)
+                + f'<path d="M{x+4},{y+h*0.4} L{x+30},{y+h*0.4} L{x+26},{y+h+2} L{x+8},{y+h+2} Z" style="fill:var(--line);stroke:var(--ink);opacity:.8"/>')
+
+    def leading(x, y):  # road edges converge on the subject
+        vx, vy = x + w*0.62, y + h*0.42
+        return (f'<line class="f-line" x1="{x}" y1="{vy}" x2="{x+w}" y2="{vy}" stroke-width="1" style="opacity:.5"/>'
+                f'<path {L} stroke-width="1.5" d="M{x+4},{y+h} L{vx},{vy} M{x+w-2},{y+h} L{vx},{vy}"/>'
+                f'<path {M} stroke-dasharray="3 3" d="M{x+w*0.3},{y+h} L{vx},{vy+2}"/>'
+                + person(vx, vy - 14, 14))
+
+    def symmetry(x, y):  # corridor with a centred door and a centred person
+        cx = x + w/2
+        return (f'<path class="f-line" stroke-width="1" d="M{x},{y} L{cx-16},{y+h*0.3} L{cx-16},{y+h*0.78} L{x},{y+h} '
+                f'M{x+w},{y} L{cx+16},{y+h*0.3} L{cx+16},{y+h*0.78} L{x+w},{y+h} M{cx-16},{y+h*0.3} L{cx+16},{y+h*0.3}"/>'
+                f'<line x1="{cx}" y1="{y}" x2="{cx}" y2="{y+h}" {M} stroke-dasharray="3 3"/>'
+                + person(cx, y + h*0.38, h*0.4))
+
+    def negative(x, y):  # tiny subject in a corner, the rest empty
+        return (f'<line class="f-line" x1="{x}" y1="{y+h*0.88}" x2="{x+w}" y2="{y+h*0.88}" stroke-width="1"/>'
+                + person(x + w*0.82, y + h*0.68, h*0.2))
+
+    panels = [("Rule of thirds", thirds), ("Lead room", lead_room), ("Headroom", headroom), ("Depth layers", depth),
+              ("Leading lines", leading), ("Symmetry", symmetry), ("Negative space", negative)]
+    arrow = ('<defs><marker id="cmp-arrow" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="6" markerHeight="6" orient="auto">'
+             '<path d="M0,0 L6,3 L0,6 Z" style="fill:var(--mark)"/></marker></defs>')
+    return panel_strip(panels, "cmp", "Composition rules").replace('">', '">' + arrow, 1)
 
 
 def three_point():
@@ -169,7 +227,7 @@ def local_cloud():
     return "".join(p)
 
 
-FIGS = {"shot-sizes.svg": shot_sizes, "camera-angles.svg": camera_angles, "three-point.svg": three_point, "rule-180.svg": rule_180,
+FIGS = {"shot-sizes.svg": shot_sizes, "camera-angles.svg": camera_angles, "composition.svg": composition, "three-point.svg": three_point, "rule-180.svg": rule_180,
         "denoise.svg": denoise, "local-cloud.svg": local_cloud}
 
 if __name__ == "__main__":
