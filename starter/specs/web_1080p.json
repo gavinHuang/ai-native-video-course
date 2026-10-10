@@ -1,0 +1,37 @@
+{
+ "_note": "Example web master. Platforms normalize loudness to about -14 LUFS; check the client spec.",
+ "container": "mp4",
+ "video_codec": [
+  "h264"
+ ],
+ "width": 1920,
+ "height": 1080,
+ "fps": [
+  23.976,
+  24,
+  25,
+  29.97,
+  30
+ ],
+ "pix_fmt": [
+  "yuv420p"
+ ],
+ "color": {
+  "primaries": "bt709",
+  "transfer": "bt709",
+  "matrix": "bt709",
+  "range": "tv"
+ },
+ "min_duration_s": 1,
+ "max_video_mbps": 20,
+ "audio_codec": [
+  "aac"
+ ],
+ "audio_rate": 48000,
+ "audio_channels": 2,
+ "loudness_lufs": -14,
+ "loudness_tol": 1.0,
+ "true_peak_max": -1.0,
+ "max_black_s": 0.5,
+ "max_freeze_s": 1.0
+}

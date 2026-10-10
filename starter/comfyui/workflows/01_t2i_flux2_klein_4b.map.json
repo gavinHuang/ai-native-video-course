@@ -1,0 +1,8 @@
+{
+  "prompt": "76.value",
+  "seed": "77:73.noise_seed",
+  "width": "77:68.value",
+  "height": "77:69.value",
+  "steps": "77:62.steps",
+  "filename_prefix": "9.filename_prefix"
+}

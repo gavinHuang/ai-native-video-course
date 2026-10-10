@@ -1,0 +1,121 @@
+item,criterion,human,judge
+0,timing,pass,pass
+0,logo visible,pass,pass
+0,hook,5,5
+1,timing,pass,pass
+1,logo visible,pass,pass
+1,hook,4,4
+2,timing,pass,pass
+2,logo visible,pass,pass
+2,hook,5,5
+3,timing,pass,pass
+3,logo visible,pass,pass
+3,hook,2,3
+4,timing,pass,pass
+4,logo visible,pass,pass
+4,hook,1,2
+5,timing,fail,fail
+5,logo visible,fail,pass
+5,hook,1,1
+6,timing,fail,fail
+6,logo visible,pass,pass
+6,hook,5,5
+7,timing,fail,fail
+7,logo visible,pass,pass
+7,hook,4,4
+8,timing,fail,fail
+8,logo visible,fail,pass
+8,hook,2,2
+9,timing,pass,pass
+9,logo visible,pass,pass
+9,hook,4,5
+10,timing,pass,pass
+10,logo visible,pass,pass
+10,hook,4,5
+11,timing,pass,pass
+11,logo visible,pass,pass
+11,hook,3,4
+12,timing,fail,fail
+12,logo visible,pass,pass
+12,hook,5,5
+13,timing,pass,pass
+13,logo visible,pass,pass
+13,hook,5,5
+14,timing,pass,pass
+14,logo visible,pass,pass
+14,hook,5,5
+15,timing,pass,pass
+15,logo visible,pass,pass
+15,hook,4,2
+16,timing,pass,pass
+16,logo visible,pass,pass
+16,hook,1,1
+17,timing,pass,pass
+17,logo visible,pass,pass
+17,hook,5,5
+18,timing,fail,fail
+18,logo visible,pass,pass
+18,hook,5,5
+19,timing,pass,fail
+19,logo visible,pass,pass
+19,hook,1,1
+20,timing,pass,pass
+20,logo visible,pass,pass
+20,hook,4,4
+21,timing,pass,pass
+21,logo visible,pass,pass
+21,hook,3,3
+22,timing,pass,pass
+22,logo visible,pass,pass
+22,hook,4,4
+23,timing,fail,fail
+23,logo visible,pass,pass
+23,hook,5,3
+24,timing,pass,pass
+24,logo visible,pass,pass
+24,hook,4,5
+25,timing,fail,fail
+25,logo visible,pass,pass
+25,hook,3,4
+26,timing,pass,pass
+26,logo visible,pass,pass
+26,hook,5,5
+27,timing,pass,pass
+27,logo visible,pass,pass
+27,hook,1,2
+28,timing,pass,pass
+28,logo visible,pass,pass
+28,hook,3,4
+29,timing,fail,fail
+29,logo visible,pass,pass
+29,hook,1,2
+30,timing,pass,pass
+30,logo visible,pass,pass
+30,hook,3,4
+31,timing,pass,pass
+31,logo visible,pass,pass
+31,hook,3,5
+32,timing,pass,pass
+32,logo visible,pass,pass
+32,hook,1,2
+33,timing,pass,pass
+33,logo visible,pass,pass
+33,hook,3,2
+34,timing,pass,pass
+34,logo visible,pass,pass
+34,hook,1,1
+35,timing,pass,pass
+35,logo visible,pass,pass
+35,hook,2,2
+36,timing,fail,pass
+36,logo visible,pass,pass
+36,hook,2,3
+37,timing,pass,pass
+37,logo visible,pass,pass
+37,hook,5,4
+38,timing,pass,pass
+38,logo visible,pass,pass
+38,hook,3,3
+39,timing,fail,fail
+39,logo visible,pass,pass
+39,hook,3,4

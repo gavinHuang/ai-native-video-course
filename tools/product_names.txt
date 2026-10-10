@@ -1,0 +1,67 @@
+# Product and model names that must not appear in "Learn" (concept) sections.
+# They are allowed in Tool walkthrough, Worked example, Lab, Model answer, and the landscape page.
+# One name per line; matching ignores case and needs word boundaries.
+Kling
+Seedance
+Veo
+Gemini
+Runway
+Aleph
+Luma
+Ray3
+Sora
+Wan
+LTX
+HunyuanVideo
+Hunyuan
+FLUX
+Midjourney
+Nano Banana
+GPT Image
+Seedream
+ElevenLabs
+HeyGen
+Synthesia
+Suno
+IndexTTS
+CosyVoice
+Qwen
+DeepSeek
+Claude
+Codex
+ChatGPT
+DaVinci Resolve
+Resolve
+Premiere
+Final Cut
+Avid
+Descript
+CapCut
+After Effects
+Nuke
+Fusion
+Blender
+Topaz
+iZotope
+Pro Tools
+Fairlight
+ComfyUI
+Comfy
+fal
+Replicate
+Higgsfield
+musubi
+AI Toolkit
+RunPod
+Modal
+Lambda
+Frame.io
+Unreal
+Marble
+Genie
+SynthID
+Jumper
+Firefly
+Photoshop
+InsightFace
+OpenCV

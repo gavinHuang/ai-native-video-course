@@ -1,0 +1,12 @@
+{
+  "prompt": "90.text",
+  "negative": "78.text",
+  "first_frame": "80.image",
+  "last_frame": "89.image",
+  "seed": "84.noise_seed",
+  "width": "81.width",
+  "height": "81.height",
+  "frames": "81.length",
+  "fps": "86.fps",
+  "filename_prefix": "83.filename_prefix"
+}

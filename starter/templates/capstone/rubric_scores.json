@@ -1,0 +1,8 @@
+{
+  "self": {"Story + direction": 0, "Visual quality + consistency": 0, "Sound": 0, "Pipeline + automation": 0,
+           "Infrastructure + cost": 0, "Rights + disclosure": 0, "Write-up + evidence": 0},
+  "peer": {"Story + direction": 0, "Visual quality + consistency": 0, "Sound": 0, "Pipeline + automation": 0,
+           "Infrastructure + cost": 0, "Rights + disclosure": 0, "Write-up + evidence": 0},
+  "evidence": {"Story + direction": "timecodes of the 3 strongest and 3 weakest moments"},
+  "improvements": ["", "", ""]
+}

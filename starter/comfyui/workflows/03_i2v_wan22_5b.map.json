@@ -1,0 +1,14 @@
+{
+  "prompt": "6.text",
+  "negative": "7.text",
+  "start_image": "56.image",
+  "seed": "3.seed",
+  "steps": "3.steps",
+  "cfg": "3.cfg",
+  "width": "55.width",
+  "height": "55.height",
+  "frames": "55.length",
+  "fps": "57.fps",
+  "shift": "48.shift",
+  "filename_prefix": "58.filename_prefix"
+}

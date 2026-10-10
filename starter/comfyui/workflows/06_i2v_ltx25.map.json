@@ -1,0 +1,11 @@
+{
+  "prompt": "398:376.value",
+  "start_image": "395.image",
+  "seed": "398:339.noise_seed",
+  "megapixels": "403.megapixels",
+  "aspect_ratio": "403.aspect_ratio",
+  "duration_s": "398:362.value",
+  "fps": "398:361.value",
+  "prompt_enhance": "398:383.value",
+  "filename_prefix": "75.filename_prefix"
+}

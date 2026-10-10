@@ -1,0 +1,12 @@
+{
+  "prompt": "340:319.value",
+  "start_image": "269.image",
+  "line_audio": "276.audio",
+  "seed": "340:286.noise_seed",
+  "width": "340:330.value",
+  "height": "340:324.value",
+  "duration_s": "340:331.value",
+  "fps": "340:323.value",
+  "prompt_enhance": "340:349.value",
+  "filename_prefix": "341.filename_prefix"
+}

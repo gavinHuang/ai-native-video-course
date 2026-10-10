@@ -1,0 +1,5 @@
+{
+  "1": {"inputs": {"image": "smoke.png"}, "class_type": "LoadImage", "_meta": {"title": "Input image"}},
+  "2": {"inputs": {"image": ["1", 0]}, "class_type": "ImageInvert", "_meta": {"title": "Invert"}},
+  "3": {"inputs": {"filename_prefix": "C11/smoke", "images": ["2", 0]}, "class_type": "SaveImage", "_meta": {"title": "Save"}}
+}

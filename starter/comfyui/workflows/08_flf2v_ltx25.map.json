@@ -1,0 +1,11 @@
+{
+  "prompt": "251:252.value",
+  "first_frame": "31.image",
+  "last_frame": "39.image",
+  "seed": "251:196.noise_seed",
+  "width": "251:215.value",
+  "height": "251:216.value",
+  "duration_s": "251:198.value",
+  "fps": "251:205.value",
+  "filename_prefix": "68.filename_prefix"
+}

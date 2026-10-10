@@ -1,0 +1,376 @@
+- {term: "10GbE", def: "10 Gigabit Ethernet. A network speed of about 1.1 GB/s, enough for a few editors to share high-quality media."}
+- {term: "180-degree rule", def: "Keep all cameras on one side of the line of action, so people keep their left and right positions on screen."}
+- {term: "3-2-1 backup", def: "Keep 3 copies of data, on 2 types of media, with 1 copy offsite."}
+- {term: "A/B test", def: "A test that shows two variants to similar audiences and compares a metric. Change one variable only."}
+- {term: "ACES", def: "Academy Color Encoding System. A standard color-management framework for film and TV pipelines."}
+- {term: "API format", def: "The ComfyUI workflow export that maps node IDs to inputs. You send it to the server to run a workflow headless."}
+- {term: "C2PA", def: "Coalition for Content Provenance and Authenticity. An open standard for signed metadata that records how a file was made."}
+- {term: "CDN", def: "Content delivery network. Servers in many places that deliver files fast to viewers."}
+- {term: "CFG", def: "Classifier-free guidance. A setting that makes a diffusion model follow the prompt more strongly. Too high gives burnt output."}
+- {term: "CTR", def: "Click-through rate. The share of viewers who click a video after they see its thumbnail and title."}
+- {term: "CUDA", def: "NVIDIA's software platform for GPU computing. Most AI tools support it first."}
+- {term: "Comfy MCP", def: "The official MCP server for ComfyUI (public beta, 2026). It lets agents search and run ComfyUI workflows."}
+- {term: "ComfyUI", def: "An open node-graph application for running and combining generative models. Also runs as a server with an API."}
+- {term: "ControlNet", def: "A model add-on that conditions generation on structure such as depth, pose, or edges."}
+- {term: "DiT", def: "Diffusion transformer. A transformer that removes noise from latent tokens. The core of current image and video models."}
+- {term: "EDL", def: "Edit decision list. A simple text format that lists edits with source and record timecodes."}
+- {term: "EU AI Act", def: "The European Union law on AI. Article 50 sets transparency duties, such as labels for deepfakes, from 2026-08-02."}
+- {term: "Elo", def: "A rating system that turns many pairwise votes into a ranking. Used by model arenas."}
+- {term: "Foley", def: "Sounds of body movement and props (steps, cloth, objects), performed or generated to picture."}
+- {term: "GGUF", def: "A file format for quantized model weights (from llama.cpp). Common for low-VRAM use in ComfyUI."}
+- {term: "GPU", def: "Graphics processing unit. A processor with many cores that runs AI models fast."}
+- {term: "GPU rental", def: "Renting a GPU machine by the hour. You pay while it runs, also when it is idle."}
+- {term: "Gaussian splatting", def: "A 3D scene format made of millions of small colored 3D Gaussians. It renders photoreal views in real time."}
+- {term: "HDR", def: "High dynamic range. Video with a larger brightness range, for example Rec.2020 with PQ or HLG."}
+- {term: "IP-Adapter", def: "An adapter that conditions an image model on a reference image for identity or style."}
+- {term: "J-cut", def: "An edit where the sound of the next shot starts before its picture."}
+- {term: "JSON schema", def: "A formal description of the structure of JSON data. Used to request and validate structured LLM output."}
+- {term: "L-cut", def: "An edit where the sound of the current shot continues over the start of the next picture."}
+- {term: "LLM as judge", def: "Using a language model to score outputs against a rubric. It must be calibrated against human scores."}
+- {term: "LUFS", def: "Loudness Units relative to Full Scale. A loudness measure that matches human hearing. Platforms set targets in LUFS."}
+- {term: "LUT", def: "Look-up table. A file that maps input colors to output colors, used for conversions and looks."}
+- {term: "LoRA", def: "Low-rank adaptation. Small trainable matrices added to a frozen model to teach it a character, product, or style."}
+- {term: "LoRA rank", def: "The size of the LoRA matrices. Higher rank gives more capacity and a larger file, and can overfit faster."}
+- {term: "LoRA strength", def: "A multiplier that sets how much a loaded LoRA changes the model, typically 0.4 to 1.0."}
+- {term: "M&E", def: "Music and effects mix. The full mix without dialogue, used to make foreign-language versions."}
+- {term: "MCP", def: "Model Context Protocol. An open standard that connects AI applications to tools and data through servers."}
+- {term: "MCP client", def: "The part of a host application that connects to one MCP server and gives its tools to the model."}
+- {term: "MCP server", def: "A program that exposes tools, resources, and prompts to AI applications through MCP."}
+- {term: "MLX", def: "Apple's machine-learning framework for Apple silicon."}
+- {term: "MoE", def: "Mixture of experts. A model with several expert sub-networks; a router uses only some of them for each token or step."}
+- {term: "NAS", def: "Network-attached storage. A shared storage server on the local network."}
+- {term: "NLE", def: "Non-linear editor. Editing software that stores edits as references and never changes the source media."}
+- {term: "NVMe", def: "A fast SSD interface. Used for models, caches, and active projects."}
+- {term: "NeRF", def: "Neural radiance field. A neural network that stores how a 3D scene looks from every direction."}
+- {term: "OpenTimelineIO", def: "An open timeline format and Python library for exchanging edits between tools."}
+- {term: "QC", def: "Quality control. Checks of deliverables against specifications: format, color tags, loudness, defects."}
+- {term: "RAID", def: "A method that combines disks for speed or protection against disk failure. It is not a backup."}
+- {term: "SynthID", def: "Google DeepMind's invisible watermark for AI-generated content."}
+- {term: "TTS", def: "Text-to-speech. A model that turns text into spoken audio."}
+- {term: "Unreal Engine", def: "A real-time 3D engine used for games, previs, and virtual production."}
+- {term: "VAE", def: "Variational autoencoder. It compresses images or video into a latent and decodes latents back to pixels."}
+- {term: "VRAM", def: "The memory on a GPU. Model weights and activations must fit in it."}
+- {term: "WebSocket", def: "A network connection that stays open, so a server can send events (such as progress) to a client."}
+- {term: "Whisper", def: "A family of open speech-recognition models that make transcripts, also with timestamps."}
+- {term: "ablation", def: "An experiment that removes one part of a method to measure what that part contributes."}
+- {term: "adoption decision", def: "The documented choice to adopt, watch, or ignore a new model, based on test data."}
+- {term: "agent", def: "A language model in a loop that chooses and calls tools, reads results, and continues until a goal is done."}
+- {term: "agent recipe", def: "A saved, tested instruction set for an agent task that a team repeats."}
+- {term: "agentic coding", def: "Coding with an agent that reads files, writes code, runs commands, and fixes errors in a loop."}
+- {term: "ambience", def: "The background sound of a place, such as traffic, wind, or room hum."}
+- {term: "analytics loop", def: "Using audience data from published videos to change the next videos."}
+- {term: "animatic", def: "Storyboard frames on a timeline with temporary sound, used to test story and timing."}
+- {term: "approval gate", def: "A point in a pipeline where a person must approve before work continues."}
+- {term: "arena", def: "A public site where people vote blind between two model outputs. Votes produce a ranking."}
+- {term: "aspect ratio", def: "The ratio of frame width to height, for example 16:9 or 9:16."}
+- {term: "async job", def: "An API request that returns a job ID at once; the result is ready later."}
+- {term: "attention", def: "The transformer operation where each token takes information from the other tokens that matter to it."}
+- {term: "audio-to-video", def: "A generation mode where an audio track conditions the picture, for example for lip sync or music cuts."}
+- {term: "audit log", def: "A record of every automated action: time, tool, inputs, result, and cost."}
+- {term: "autoscaling", def: "Automatic change of the number of workers based on load, for example queue depth."}
+- {term: "avatar", def: "A generated talking person, driven by a script and a voice."}
+- {term: "bias", def: "A systematic pattern in model output, such as stereotypes in who appears in which role."}
+- {term: "bit depth", def: "The number of bits per color channel. 10-bit has 1,024 steps and is safer for grading than 8-bit."}
+- {term: "bitrate", def: "The amount of data per second in a media file, for example 50 Mb/s."}
+- {term: "break-even", def: "The usage level where owning hardware and renting cloud compute cost the same."}
+- {term: "budget", def: "The planned spend for a project, shot, or scene, with caps that stop overspend."}
+- {term: "calibration", def: "Comparing an automatic judge with human scores and adjusting it until they agree."}
+- {term: "camera angle", def: "The height and direction of the camera relative to the subject, such as low, high, or eye level."}
+- {term: "camera control", def: "Model parameters or inputs that set camera moves exactly, instead of words."}
+- {term: "camera movement", def: "A change of camera position or direction during a shot, such as a dolly, pan, or orbit."}
+- {term: "captioning", def: "Writing text descriptions for training images, or making caption files for viewers."}
+- {term: "captions", def: "On-screen text of speech and important sounds, for accessibility and silent viewing."}
+- {term: "character pipeline", def: "An automated chain from character references to finished, consistent shots of that character."}
+- {term: "character sheet", def: "Reference images of a character from several angles, with expressions and outfits."}
+- {term: "checkpoint", def: "A saved state of model weights during training, or a full model file."}
+- {term: "cherry-picking", def: "Showing only the best results. Normal in demos; test models yourself."}
+- {term: "chroma subsampling", def: "Storing color at lower resolution than brightness, for example 4:2:0."}
+- {term: "codec", def: "A method to compress and decompress video or audio, such as H.264, H.265, AV1, or ProRes."}
+- {term: "cold start", def: "The delay when a new worker starts and loads a model before it can run jobs."}
+- {term: "color space", def: "A definition of colors by primaries, white point, and transfer function, such as Rec.709."}
+- {term: "color temperature", def: "The color of light in kelvin. Low values are warm (orange); high values are cool (blue)."}
+- {term: "compositing", def: "Combining layers of images or video into one final image."}
+- {term: "conditioning", def: "All information that guides generation: text, images, references, structure, audio."}
+- {term: "conform", def: "Making all clips in a timeline match the project settings, or relinking an edit to full-quality media."}
+- {term: "consent", def: "Informed, specific, documented permission from a person to use their likeness or voice."}
+- {term: "consistency", def: "The same character, product, place, and look across shots."}
+- {term: "container", def: "A packaged, isolated software environment, for example a Docker image."}
+- {term: "content credentials", def: "C2PA metadata attached to a file that states its origin and edits, with a signature."}
+- {term: "context engineering", def: "Choosing what information goes into an LLM's context, in which form, and when."}
+- {term: "context window", def: "The maximum number of tokens an LLM can use at one time."}
+- {term: "contrast ratio", def: "The ratio of key light to fill light. Higher ratios give darker shadows and more drama."}
+- {term: "conversational editing", def: "Editing by a series of instructions, where each builds on the previous result."}
+- {term: "copyright", def: "Legal rights over original creative works. Its application to AI training and outputs differs by country."}
+- {term: "cost per usable second", def: "Total generation cost divided by the seconds that pass review. The real cost of generated footage."}
+- {term: "coverage", def: "Shots of the same action from several sizes and angles, so the editor has choices."}
+- {term: "critique loop", def: "A cycle of draft, critique against a rubric, and revision, with a stop rule."}
+- {term: "custom node", def: "A third-party extension for ComfyUI. It runs code on your machine."}
+- {term: "cut-down", def: "A shorter version of an edit, such as 30, 15, or 6 seconds."}
+- {term: "data protection", def: "Laws about personal data, such as GDPR. Face and voice data can be biometric data."}
+- {term: "dataset", def: "The collection of examples used to train or fine-tune a model."}
+- {term: "deepfake", def: "Realistic synthetic media that shows a real person, place, or event that did not happen."}
+- {term: "deliverables", def: "The files a project must hand over: masters, platform versions, stems, captions, reports."}
+- {term: "denoise strength", def: "In image-to-image or video-to-video, how much noise is added to the input before generation. Higher changes more."}
+- {term: "depth control", def: "Conditioning a model on a depth map to fix the scene layout."}
+- {term: "depth of field", def: "The zone of the image that is in focus."}
+- {term: "dialogue", def: "The spoken lines of characters."}
+- {term: "diffusion", def: "A generative method that learns to remove noise, and generates by denoising random noise step by step."}
+- {term: "disclosure", def: "Telling viewers that content is AI-generated or AI-altered, by labels or platform settings."}
+- {term: "distillation", def: "Training a smaller or faster student model to copy a larger teacher, for example in fewer steps."}
+- {term: "dolly", def: "A camera move toward (in) or away from (out) the subject."}
+- {term: "dry run", def: "A run that shows planned actions and costs without doing them."}
+- {term: "dubbing", def: "Replacing the dialogue of a video with another language."}
+- {term: "duration control", def: "A TTS feature that makes speech fit a given length."}
+- {term: "embedding", def: "A vector of numbers that represents a token or item. Similar meanings are near each other."}
+- {term: "energy footprint", def: "The energy that a production uses, mainly from GPU compute."}
+- {term: "environment sheet", def: "Reference images of a location from several angles and times, often with a panorama and a plan."}
+- {term: "eval", def: "An evaluation: a fixed set of test cases with criteria, used to compare models or versions."}
+- {term: "eval harness", def: "Code that runs an eval set on models automatically and collects scores."}
+- {term: "experiment tracking", def: "Recording configs, data versions, results, and costs for each training run."}
+- {term: "few-shot", def: "Giving a model a few examples of the desired output in the prompt."}
+- {term: "ffmpeg", def: "The open command-line tool for converting, editing, and analyzing video and audio."}
+- {term: "fill light", def: "A softer light that opens the shadows made by the key light."}
+- {term: "first/last frame", def: "A generation mode where you give the start frame and the end frame of a clip."}
+- {term: "flow matching", def: "A training method where the model learns a velocity from noise to data along straight paths. Allows fewer steps."}
+- {term: "focal length", def: "The lens property (in mm) that sets field of view and perspective."}
+- {term: "frame interpolation", def: "Making new in-between frames, for example to convert 16 fps to 24 fps."}
+- {term: "generated world", def: "A 3D or interactive space made by a world model, such as a Gaussian-splat scene."}
+- {term: "glossary", def: "A list of approved terms and translations, used to keep terminology correct."}
+- {term: "gradient descent", def: "The training method that changes each parameter a small step in the direction that reduces the loss."}
+- {term: "guardrail", def: "A limit on what an agent can do: permissions, budgets, confirmations."}
+- {term: "headless", def: "Running software through its API without a user interface."}
+- {term: "highlight detection", def: "Finding the best short moments in long content automatically."}
+- {term: "hook", def: "The first 1–3 seconds of a video, designed to make the viewer stay."}
+- {term: "human gate", def: "A pipeline step where a person must approve creative, legal, or cost decisions."}
+- {term: "human in the loop", def: "A design where people set goals, review results, and make final decisions."}
+- {term: "idempotency", def: "A property where repeating a request has the same effect as doing it once. Prevents double billing on retries."}
+- {term: "identity drift", def: "Gradual change of a character's or product's appearance across shots."}
+- {term: "identity score", def: "An automatic similarity score between a generated face (or product) and its reference."}
+- {term: "image-to-video", def: "A generation mode that starts from a given image as the first frame."}
+- {term: "indemnity", def: "A contract promise by one party to cover certain legal claims, offered by some AI vendors."}
+- {term: "inference", def: "Using a trained model to make outputs. The parameters do not change."}
+- {term: "infrastructure as code", def: "Defining cloud resources in code files, so they can be created and destroyed reliably."}
+- {term: "inpainting", def: "Regenerating only a masked area of an image or video."}
+- {term: "instruction editing", def: "Changing an image or video with a natural-language instruction while keeping the rest."}
+- {term: "interactive video", def: "Video that a model generates in real time in response to user input."}
+- {term: "joint audio-video", def: "Generation of picture and sound together in one model, so they are synchronized."}
+- {term: "key frame", def: "An approved still image that defines a shot before motion is generated."}
+- {term: "key light", def: "The main light on a subject."}
+- {term: "latent", def: "The compressed representation of an image or video in which a diffusion model works."}
+- {term: "lead room", def: "Space in the frame in the direction a subject looks or moves."}
+- {term: "leakage", def: "When a fine-tuned model shows the trained subject or training backgrounds when not asked."}
+- {term: "learning rate", def: "The size of each parameter update during training."}
+- {term: "license", def: "The legal terms that say how you may use a model, an output, music, or other assets."}
+- {term: "license tier", def: "A plan level with specific usage rights, such as commercial or streaming use."}
+- {term: "likeness", def: "A person's recognizable face, body, or voice, protected by law in many places."}
+- {term: "lip sync", def: "Matching mouth movement to speech audio, or a model that changes the mouth to match new audio."}
+- {term: "localization", def: "Adapting a video for another language and culture: voice, captions, on-screen text."}
+- {term: "long-form coherence", def: "Keeping story, characters, and space consistent over minutes of generated video."}
+- {term: "look bible", def: "A document that defines a project's visual rules: palette, light, texture, lenses, references."}
+- {term: "loss", def: "A number that measures how wrong a model's prediction is during training."}
+- {term: "machine-ready script", def: "A script with standard tags and fixed descriptors that tools can parse directly."}
+- {term: "mask", def: "An image that marks which pixels an operation should change."}
+- {term: "match cut", def: "A cut that links two shots by shape, motion, or idea."}
+- {term: "matte", def: "A grayscale image that defines transparency for compositing."}
+- {term: "media asset management", def: "A system that stores media with IDs and metadata so people and tools can find and reuse it."}
+- {term: "memory bandwidth", def: "How fast data moves between GPU memory and compute units, in GB/s."}
+- {term: "mesh", def: "A 3D surface made of triangles, with textures and materials."}
+- {term: "metadata", def: "Data about a file: origin, settings, rights, technical properties."}
+- {term: "misinformation", def: "False information that spreads as if true, including realistic synthetic video."}
+- {term: "model", def: "A function with many parameters that maps an input (for example a prompt and noise) to an output (for example a video)."}
+- {term: "model card", def: "A document that describes a model: architecture, data, uses, limits, and license."}
+- {term: "model registry", def: "A managed list of models and adapters with versions, evaluations, and rights."}
+- {term: "morphing", def: "An artifact where faces or objects change shape unnaturally during a clip."}
+- {term: "motion control", def: "Inputs that set how subjects or the camera move, such as motion references or parameters."}
+- {term: "motivated light", def: "Light that seems to come from a real source in the scene."}
+- {term: "motivated movement", def: "A camera move that has a story reason, such as following action or revealing information."}
+- {term: "multi-agent", def: "A system where several specialized agents work on parts of a task."}
+- {term: "multi-shot", def: "Generation of several connected shots in one request, with shared cast and space."}
+- {term: "music generation", def: "Making music with AI models from a text brief."}
+- {term: "native audio", def: "Sound that a video model generates together with the picture."}
+- {term: "node graph", def: "A visual program made of connected nodes, such as a ComfyUI workflow."}
+- {term: "noise reduction", def: "Removing unwanted background noise from audio."}
+- {term: "object storage", def: "Cloud storage for files as objects in buckets, such as S3-compatible storage."}
+- {term: "observability", def: "Metrics, logs, and traces that show how a system performs."}
+- {term: "offload", def: "Moving parts of a model to CPU memory when GPU memory is too small."}
+- {term: "on-screen text", def: "Text that appears in the picture, such as signs, titles, or graphics."}
+- {term: "orchestrator", def: "The component that moves work between stages and agents in a pipeline."}
+- {term: "outpainting", def: "Extending an image or video beyond its frame, for example to change aspect ratio."}
+- {term: "overfit", def: "When a model learns its training data too exactly and loses flexibility."}
+- {term: "pacing", def: "The speed and rhythm of an edit, set mainly by shot length."}
+- {term: "panorama anchor", def: "A 360° image of a location used as a reference to keep the space consistent."}
+- {term: "paper", def: "A research publication that describes a method and its results."}
+- {term: "paper edit", def: "A list of chosen lines and shots in story order, made before the cut."}
+- {term: "parameter", def: "One of the numbers inside a model that training sets."}
+- {term: "patch", def: "A small block of an image or video (in space and time) that becomes one token."}
+- {term: "per-output API", def: "A model API billed per output, such as per image or per video second."}
+- {term: "personality rights", def: "Rights that protect a person's name, image, and voice from unauthorized commercial use."}
+- {term: "personalization", def: "Making versions of a video for specific audiences or people."}
+- {term: "photogrammetry", def: "Reconstructing 3D geometry from many overlapping photos."}
+- {term: "pipeline diagram", def: "A diagram of the stages, tools, agents, and gates of a production system."}
+- {term: "previs", def: "Previsualization. A rough version of shots or scenes made to plan the production."}
+- {term: "product sheet", def: "Reference images of a product from all sides, with logo and material details."}
+- {term: "production pipeline", def: "The ordered stages that turn a brief into delivered video."}
+- {term: "production plan", def: "The complete plan for a project: creative, technical, budget, schedule, rights, risks."}
+- {term: "project memory", def: "A file in a repository that gives an agent stable project rules and commands."}
+- {term: "prompt adherence", def: "How exactly a model follows the prompt."}
+- {term: "prompt grammar", def: "A fixed order of prompt elements: cinematography, subject, action, context, light, sound, style."}
+- {term: "prompt log", def: "A record of each generation: model, prompt, seed, settings, references, cost, date."}
+- {term: "proxy", def: "A small, light copy of media used for fast editing."}
+- {term: "publishing API", def: "A platform API for uploading videos and setting metadata."}
+- {term: "quality gate", def: "An automatic check that an output must pass before the next stage."}
+- {term: "quantization", def: "Storing model parameters with fewer bits to save memory and often time."}
+- {term: "queue", def: "A list of jobs that workers process in order."}
+- {term: "real-time generation", def: "Generating frames as fast as they are played."}
+- {term: "reference", def: "An input (image, video, or audio) that shows the model what an element must look or sound like."}
+- {term: "reference image", def: "An image given to a model to control identity, style, or composition."}
+- {term: "reference-to-video", def: "A generation mode that uses references to make new shots with the same elements."}
+- {term: "reframe", def: "Changing the crop of a shot for another aspect ratio, often with subject tracking."}
+- {term: "region editing", def: "Editing only a selected area of a video."}
+- {term: "relight", def: "Changing the lighting of an existing image or video."}
+- {term: "reproducibility", def: "The ability to make the same output again from the same inputs and versions."}
+- {term: "resource", def: "In MCP, read-only data that a server exposes to the client."}
+- {term: "responsible use", def: "Using AI in ways that avoid harm, respect rights, and are transparent."}
+- {term: "restyle", def: "Changing the visual style of footage while keeping its motion and performance."}
+- {term: "retention", def: "How long viewers keep watching. The retention curve shows where they leave."}
+- {term: "retry", def: "Repeating a failed request, usually with backoff."}
+- {term: "reverb", def: "The sound reflections of a space. Also an effect that adds them."}
+- {term: "review", def: "Checking outputs against the specification and deciding keep, fix, or regenerate."}
+- {term: "review and approval", def: "A process and tool for comments and approvals on cuts and versions."}
+- {term: "rights log", def: "A record of the source, license, restrictions, and consent for every asset."}
+- {term: "risk register", def: "A list of project risks with likelihood, impact, owner, and mitigation."}
+- {term: "room tone", def: "The quiet background sound of a space, used to fill gaps in dialogue."}
+- {term: "rotoscoping", def: "Making a mask that follows a subject frame by frame."}
+- {term: "rough cut", def: "An early version of an edit with the right shots in order, before fine timing."}
+- {term: "routing", def: "Sending each job to the model or service that fits it best."}
+- {term: "routing table", def: "A table that maps shot types to models, modes, and limits."}
+- {term: "rubric", def: "A set of criteria with defined levels used to score work."}
+- {term: "rule of thirds", def: "A composition guide that places subjects on lines dividing the frame into thirds."}
+- {term: "sampler", def: "The method that takes each denoising step, such as Euler or DPM++."}
+- {term: "scale to zero", def: "Stopping all workers when there are no jobs, so idle time costs nothing."}
+- {term: "scene extension", def: "Continuing a generated clip from its last frames to make a longer shot."}
+- {term: "scopes", def: "Measurement displays for video levels and color: waveform, parade, vectorscope."}
+- {term: "screen direction", def: "The left-to-right or right-to-left direction of movement and looks, kept consistent across cuts."}
+- {term: "secrets", def: "Sensitive values such as API keys, stored in a secrets manager, never in code."}
+- {term: "seed", def: "The number that fixes the starting noise of a generation, so it can be reproduced."}
+- {term: "selects", def: "The takes marked as good enough for the edit."}
+- {term: "serverless GPU", def: "GPU compute that starts containers on demand and bills per second of use."}
+- {term: "setup and payoff", def: "An element shown early in a story that returns with meaning later."}
+- {term: "shot list", def: "A list of all shots with size, angle, lens, move, action, and duration."}
+- {term: "shot matching", def: "Grading shots so that they look continuous within a scene."}
+- {term: "shot size", def: "How much of the subject the frame shows, from extreme wide to extreme close-up."}
+- {term: "shot specification", def: "The complete description of one shot, used to prompt and to review."}
+- {term: "showreel", def: "A short video of your best work, used in a portfolio."}
+- {term: "sidechain", def: "A method where one signal (dialogue) controls processing of another (music ducking)."}
+- {term: "sound design", def: "Creating and layering sounds to support story and emotion."}
+- {term: "sound effects", def: "Specific sounds for events, such as doors, impacts, or vehicles."}
+- {term: "specialization", def: "A focused career path after the program."}
+- {term: "spot instance", def: "Cheaper cloud compute that the provider can stop at any time."}
+- {term: "stem separation", def: "Splitting a mix into parts such as voice, music, and effects."}
+- {term: "stems", def: "Separate submixes of a final mix, such as dialogue, music, and effects."}
+- {term: "step", def: "One denoising iteration in diffusion generation."}
+- {term: "story structure", def: "The shape of a story: situation, change, tension, release."}
+- {term: "storyboard", def: "A sequence of frames that shows each planned shot."}
+- {term: "structured output", def: "LLM output in a fixed machine-readable format, such as JSON that matches a schema."}
+- {term: "structured prompt", def: "A prompt written as structured data (for example JSON) with one field per element."}
+- {term: "style reference", def: "A reference image that controls style, palette, or texture only."}
+- {term: "subgraph", def: "A group of ComfyUI nodes packaged as one reusable unit with named inputs."}
+- {term: "system prompt", def: "Stable instructions that set an LLM's role, rules, and output format."}
+- {term: "technical report", def: "A detailed document from a lab about a model's design, training, and results."}
+- {term: "technical write-up", def: "A report that documents a production with decisions, data, costs, and limits."}
+- {term: "template", def: "A reusable structure with fixed and variable parts."}
+- {term: "tempo", def: "The speed of music in beats per minute (BPM)."}
+- {term: "temporal consistency", def: "Stability of objects, light, and detail from frame to frame."}
+- {term: "tensor cores", def: "GPU units for fast low-precision matrix math used by AI models."}
+- {term: "text encoder", def: "The model part that turns the prompt into embeddings. Often a large language model."}
+- {term: "text-to-video", def: "A generation mode that makes video from a text prompt only."}
+- {term: "thumbnail", def: "The still image that represents a video in feeds and search."}
+- {term: "tiled decode", def: "Decoding a latent in tiles to reduce peak memory."}
+- {term: "timecode", def: "An address for each frame in HH:MM:SS:FF."}
+- {term: "token", def: "The unit a transformer processes: part of a word, an image patch, or a block of video or audio."}
+- {term: "tool call", def: "A structured request from a model to run a named tool with given inputs."}
+- {term: "tool design", def: "Defining tool names, descriptions, schemas, and results so agents use them correctly."}
+- {term: "track layout", def: "A standard order and grouping of tracks in an edit or mix session."}
+- {term: "tracking", def: "Following the motion of points or surfaces in a shot, to attach other elements to them."}
+- {term: "training", def: "The process that sets a model's parameters from data."}
+- {term: "transcript editing", def: "Editing video by editing its transcript text."}
+- {term: "transfer function", def: "The curve that maps signal values to brightness, such as gamma, PQ, HLG, or log."}
+- {term: "transformer", def: "A neural network architecture built on attention. The base of current LLMs and DiTs."}
+- {term: "treatment", def: "A one-page description of the idea, structure, tone, and look of a video."}
+- {term: "trigger word", def: "A unique token that activates the subject a LoRA learned."}
+- {term: "true peak", def: "The highest level of an audio signal, including peaks between samples, in dBTP."}
+- {term: "turnaround", def: "Views of a character or object from front, side, back, and three-quarter."}
+- {term: "upscaling", def: "Increasing resolution. Generative upscalers add new detail that may be invented."}
+- {term: "variant", def: "One version of a templated video, defined by one row of data."}
+- {term: "vectorscope", def: "A scope that shows hue and saturation of the image."}
+- {term: "vendor abstraction", def: "One interface over several vendors, so a vendor change is a configuration change."}
+- {term: "video editing model", def: "A model that changes an existing video from an instruction."}
+- {term: "video-to-video", def: "A generation mode that transforms a source video while keeping its motion."}
+- {term: "virtual production", def: "Filmmaking with real-time 3D environments, for example on LED walls with tracked cameras."}
+- {term: "voice clone", def: "A synthetic copy of a real person's voice. Requires consent."}
+- {term: "voice design", def: "Creating a synthetic voice from a text description."}
+- {term: "voice lock", def: "Keeping a character's voice the same across generations, using a voice reference."}
+- {term: "watermark", def: "A mark in content that identifies its origin. Invisible watermarks can survive editing."}
+- {term: "waveform", def: "A scope that shows brightness levels across the frame."}
+- {term: "webhook", def: "An HTTP call that a service sends to your endpoint when an event happens, such as job completion."}
+- {term: "weights", def: "The stored parameter values of a model."}
+- {term: "white box", def: "A simple grey 3D block-out of a scene used to plan cameras and layout."}
+- {term: "workflow", def: "A fixed sequence of steps in code, as opposed to an autonomous agent. In ComfyUI, a saved graph."}
+- {term: "world model", def: "A model that generates an explorable or interactive space, not only a fixed clip."}
+- {term: "models.lock", def: "A file that lists each model file of a workflow with its URL, size, SHA-256 hash, and license. It makes downloads repeatable and shows license conflicts."}
+- {term: "reference latent", def: "A reference image that the VAE encodes and attaches to the conditioning, so the model can copy identity, objects, or places from it."}
+- {term: "frame count rule", def: "The valid frame counts of a video model, set by its VAE time compression. Example: 4n+1 for Wan (81, 121), 8n+1 for LTX."}
+- {term: "cosine similarity", def: "A measure of how closely two vectors point in the same direction, from -1 to 1. Used to compare face embeddings."}
+- {term: "timeline", def: "The sequence of edits on video and audio tracks in an editor. Each edit references part of a media file (source in/out) and places it in time (record in/out)."}
+- {term: "assembly", def: "The first, complete version of an edit: all chosen shots in script order at planned lengths, before the editor's pass."}
+- {term: "plan-approve-act-review", def: "The cycle for agent sessions: the agent proposes steps, a person approves them, the agent acts on a copy and logs every change, and the change is checked against a diff."}
+- {term: "safe zone", def: "The part of the frame that a platform's interface does not cover. Keep captions and key picture content inside it."}
+- {term: "gamut", def: "The range of colors that a color space can show, set by its primaries. Rec.709 is small, Rec.2020 is large."}
+- {term: "delta E", def: "A measure of the difference between two colors (distance in Lab). Below about 2 is hard to see between two shots."}
+- {term: "roto", def: "Rotoscoping: making a matte for a moving object frame by frame; AI masks now do most of it."}
+- {term: "planar tracking", def: "Tracking a flat surface through a shot (position, scale, rotation, perspective), so a logo or screen can be pinned to it."}
+- {term: "cadence", def: "The rhythm of motion from frame to frame. Repeated frames after a frame-rate conversion make an uneven cadence (judder)."}
+- {term: "dialogue edit", def: "Cleaning and joining dialogue: removing clicks and distracting breaths, smoothing joins, matching levels, and filling gaps with room tone."}
+- {term: "bus", def: "A submix in a DAW: several tracks routed to one channel with one fader and one set of processing. DX, MX, and FX buses become the stems."}
+- {term: "stem", def: "A submix of one part of the soundtrack (dialogue, music, or effects), full length from the same start, so the parts add up to the mix."}
+- {term: "null test", def: "Adding the stems, subtracting the mix, and measuring what is left; a residual near silence proves that the stems add up to the mix."}
+- {term: "ducking", def: "Lowering one sound (usually music) automatically while another (usually dialogue) plays, with a sidechain compressor."}
+- {term: "idempotency key", def: "A unique key for one logical request (for example S07.p2.g4). Repeating the request with the same key returns the first result instead of doing the work again."}
+- {term: "exponential backoff", def: "Waiting longer after each failed try (for example 2, 4, 8 s), usually with random jitter, before a retry."}
+- {term: "dead-letter queue", def: "Where jobs go after their last failed try, so that a person can look at them."}
+- {term: "ffprobe", def: "The ffmpeg tool that reads facts about a media file: streams, codecs, size, frame rate, duration, color tags."}
+- {term: "sidecar metadata", def: "A small file next to a media file (for example JSON) with its prompt-log ID, rights status, and technical data."}
+- {term: "frame-accurate trim", def: "A cut at an exact frame. It needs decoding and re-encoding; a stream copy can only cut at keyframes."}
+- {term: "test media", def: "Media generated for tests (test patterns, tones) at known sizes, rates, and lengths, so that results can be asserted."}
+- {term: "sandbox", def: "A limit on what a tool may touch, for example only paths inside the project folder."}
+- {term: "LLM judge", def: "An LLM that scores outputs against a rubric. Calibrate it against human judgments before you trust it."}
+- {term: "pipeline metrics", def: "Measures of a production system: cost and human minutes per finished minute, rejection rate per gate, lead time."}
+- {term: "compute-bound", def: "A workload limited by arithmetic speed, for example video diffusion, where many tokens use the same weights in each step."}
+- {term: "bandwidth-bound", def: "A workload limited by memory speed, for example LLM decoding, which reads all weights for every token."}
+- {term: "lifecycle rule", def: "A storage rule that moves or deletes objects by age, for example delete temporary files after 30 days."}
+- {term: "budget alert", def: "A notice when spending reaches a share of a budget. It warns after money is spent; queue caps refuse before."}
+- {term: "least privilege", def: "Giving each person, service, or agent only the rights that its task needs."}
+- {term: "data classification", def: "Sorting project data into classes (confidential, personal, internal, public) with a rule for where each class may go."}
+- {term: "caption", def: "The text that describes a training image. For a LoRA it starts with the trigger word and describes what varies."}
+- {term: "dataset card", def: "A document that describes a dataset: purpose, counts, sources, licenses and consent, known gaps, and allowed uses."}
+- {term: "overfitting", def: "Training too long or too strongly, so the model copies training details and loses flexibility."}
+- {term: "sample grid", def: "One image with renders of the same prompts and seeds for each checkpoint, to compare checkpoints side by side."}
+- {term: "LoRA evaluation", def: "Testing a LoRA for fidelity (identity), flexibility (new prompts), and leakage (no-trigger prompts), and in the real pipeline."}
+- {term: "adapter serving", def: "Keeping a base model loaded and applying LoRAs per request, with a strength, from a cache."}
+- {term: "input hash cache", def: "Storing outputs under a hash of all their inputs, so a re-run makes only the outputs whose inputs changed."}
+- {term: "minimum detectable effect", def: "The smallest change that a test is planned to detect; it sets the sample size."}
+- {term: "style guide", def: "Rules per language or brand: formality, units, dates, names, caption style."}
+- {term: "risk-based review", def: "Review effort that follows the cost of an error: full human review for high-risk content, samples for low risk."}
+- {term: "retention curve", def: "The share of viewers still watching at each second of a video."}
+- {term: "click-through rate", def: "The share of people who saw a thumbnail and title and clicked (CTR)."}
+- {term: "platform API", def: "A platform's programming interface for upload, metadata, scheduling, and analytics."}
+- {term: "AI disclosure", def: "Telling viewers that content is AI-generated or altered, with platform settings, labels, and provenance data."}
+- {term: "human authorship", def: "The human creative contribution (writing, selection, arrangement, editing) that copyright protection may depend on in AI-assisted work."}
+- {term: "digital replica", def: "An AI copy of a real person's voice or likeness. New laws and performer agreements require consent for it."}
+- {term: "consent record", def: "A signed document that says who consents to what use of their likeness or voice, where, for how long, and how to withdraw."}
+- {term: "biometric data", def: "Data about a person's body, such as a face or voice, used to identify them. A special category under laws such as the GDPR."}
+- {term: "withdrawal", def: "When a person takes back consent. New uses stop, and models and data are deleted as the consent record says."}
+- {term: "invisible watermark", def: "A signal hidden in pixels or audio that marks content as generated. It survives some edits and is lost in others."}
+- {term: "digital source type", def: "An IPTC value that says how content was made, for example trainedAlgorithmicMedia for generated content."}
+- {term: "bias review", def: "A review of many outputs to see who is shown in which roles, and who is missing, followed by changes to the casting."}
+- {term: "studio policy", def: "A one-page, signed team document that says what the studio never makes, what needs consent, and how to stop or refuse a job."}

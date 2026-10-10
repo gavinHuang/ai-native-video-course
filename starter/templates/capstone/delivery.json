@@ -1,0 +1,14 @@
+{
+  "plan": ["plan/treatment.md", "plan/bible.md", "plan/shots.json", "plan/routing.md",
+           "plan/pipeline.md", "plan/rights_disclosure.md", "plan/schedule_risks.md"],
+  "files": [
+    {"file": "deliver/film_master.mov", "spec": "specs/broadcast_ebu_r128.json", "signed": true},
+    {"file": "deliver/film_web.mp4", "spec": "specs/web_1080p.json", "signed": true},
+    {"file": "deliver/ep01_9x16.mp4", "spec": "specs/reels_9x16.json", "signed": true}
+  ],
+  "captions": ["deliver/film.en.srt", "deliver/ep01.en.srt"],
+  "stems": ["deliver/stems/DX.wav", "deliver/stems/MX.wav", "deliver/stems/FX.wav", "deliver/stems/ME.wav"],
+  "logs": ["logs/prompts.jsonl", "logs/rights.jsonl"],
+  "writeup": "writeup.md",
+  "rubric": "rubric_scores.json"
+}

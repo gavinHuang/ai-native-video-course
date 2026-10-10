@@ -1,0 +1,7 @@
+{"title": "Example", "ratio": "9:16", "shots": [
+ {"id": "S01", "duration_s": 3, "size": "ECU", "angle": "eye level", "lens_mm": 100, "move": "locked-off",
+  "subject": "a printed photo in Mara's hand", "action": "rain drops appear on the locker in the photo",
+  "light": "cold fluorescent top light", "audio": "paper rustle, distant hospital beeps", "purpose": "hook: a visual question"},
+ {"id": "S02", "duration_s": 4, "size": "MCU", "angle": "eye level", "lens_mm": 85, "move": "slow push-in",
+  "subject": "Mara, 30s, short black bob, scar on left eyebrow, olive raincoat", "action": "she looks up from the photo to the dry locker",
+  "light": "cold top light, warm practical from the open locker", "audio": "no music", "purpose": "reaction: she sees the difference"}]}

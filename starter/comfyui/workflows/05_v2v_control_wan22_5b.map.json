@@ -1,0 +1,12 @@
+{
+  "prompt": "6.text",
+  "negative": "7.text",
+  "ref_image": "70.image",
+  "control_video": "66.file",
+  "seed": "3.seed",
+  "steps": "3.steps",
+  "width": "60.width",
+  "height": "60.height",
+  "frames": "60.length",
+  "filename_prefix": "58.filename_prefix"
+}

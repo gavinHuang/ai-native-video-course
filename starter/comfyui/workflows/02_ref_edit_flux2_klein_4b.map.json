@@ -1,0 +1,8 @@
+{
+  "prompt": "92:109.text",
+  "ref_image_1": "76.image",
+  "ref_image_2": "81.image",
+  "seed": "92:106.noise_seed",
+  "steps": "92:102.steps",
+  "filename_prefix": "9.filename_prefix"
+}

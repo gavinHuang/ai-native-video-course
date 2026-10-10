@@ -1,0 +1,98 @@
+[
+  {
+    "workflow": "01_t2i_flux2_klein_4b",
+    "template": "image_flux2_klein_text_to_image",
+    "note": "Text to image, distilled 4-step model. First graph in C11\u00b7M01.",
+    "models": [
+      "flux-2-klein-4b.safetensors",
+      "flux2-vae.safetensors",
+      "qwen_3_4b.safetensors"
+    ],
+    "download_gb": 16.1
+  },
+  {
+    "workflow": "02_ref_edit_flux2_klein_4b",
+    "template": "image_flux2_klein_image_edit_4b_distilled",
+    "note": "Start frame from two reference images (character + place). Used in C11\u00b7M02 and M03.",
+    "models": [
+      "flux-2-klein-4b-fp8.safetensors",
+      "flux2-vae.safetensors",
+      "qwen_3_4b.safetensors"
+    ],
+    "download_gb": 12.5
+  },
+  {
+    "workflow": "03_i2v_wan22_5b",
+    "template": "video_wan2_2_5B_ti2v",
+    "note": "Image to video, 5B model, 1280x704, 121 frames at 24 fps (5 s). Fits a 24 GB GPU.",
+    "models": [
+      "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "wan2.2_ti2v_5B_fp16.safetensors",
+      "wan2.2_vae.safetensors"
+    ],
+    "download_gb": 18.1
+  },
+  {
+    "workflow": "04_flf2v_wan22_14b",
+    "template": "video_wan2_2_14B_flf2v",
+    "note": "First and last frame to video, 14B MoE (high-noise + low-noise experts), 20 steps split 10/10.",
+    "models": [
+      "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors",
+      "wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors",
+      "wan_2.1_vae.safetensors"
+    ],
+    "download_gb": 35.6
+  },
+  {
+    "workflow": "05_v2v_control_wan22_5b",
+    "template": "video_wan2_2_5B_fun_control",
+    "note": "Video to video with a control video (depth, pose, or edges) and a reference image.",
+    "models": [
+      "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "wan2.2_fun_control_5B_bf16.safetensors",
+      "wan2.2_vae.safetensors"
+    ],
+    "download_gb": 18.1
+  },
+  {
+    "workflow": "06_i2v_ltx25",
+    "template": "video_ltx2_5_i2v",
+    "note": "Image to video with native audio (LTX-2.5, distilled, INT8). Two stages: half size, then 2x latent upscale.",
+    "models": [
+      "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "gemma4_e2b_it_int8_convrot.safetensors",
+      "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "ltx-2.5-audio-vae-bf16.safetensors",
+      "ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors",
+      "ltx-2.5-video-vae-bf16.safetensors"
+    ],
+    "download_gb": 44.9
+  },
+  {
+    "workflow": "07_lipsync_ia2v_ltx23",
+    "template": "video_ltx2_3_ia2v",
+    "note": "Image + audio line to video: the face speaks the line (lip sync). Stage 6 of the C11\u00b7M03 pipeline.",
+    "models": [
+      "gemma-3-12b-it-abliterated_lora_rank64_bf16.safetensors",
+      "gemma_3_12B_it_fp4_mixed.safetensors",
+      "ltx-2.3-22b-dev-fp8.safetensors",
+      "ltx-2.3-spatial-upscaler-x2-1.1.safetensors",
+      "ltx_2.3_22b_distilled_1.1_lora_dynamic_fro09_avg_rank_111_bf16.safetensors"
+    ],
+    "download_gb": 43.0
+  },
+  {
+    "workflow": "08_flf2v_ltx25",
+    "template": "video_ltx2_5_flf2v",
+    "note": "First and last frame to video with LTX-2.5 (alternative to 04).",
+    "models": [
+      "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "gemma4_e2b_it_int8_convrot.safetensors",
+      "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "ltx-2.5-audio-vae-bf16.safetensors",
+      "ltx-2.5-video-vae-bf16.safetensors"
+    ],
+    "download_gb": 43.9
+  }
+]
