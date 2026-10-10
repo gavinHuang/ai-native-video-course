@@ -2,7 +2,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap">
 <style>
-/* Layout: edit-suite — fixed course rail on the left, one reading column, modules shown as clips on a timeline */
+/* Layout: edit-suite — fixed course rail on the left (courses with collapsible module lists), one reading column */
 :root{
   --bg:#F4F6F8; --surface:#FFFFFF; --ink:#151A22; --muted:#596273; --line:#D8DDE5;
   --accent:#0E7A72; --accent-soft:#E2F2F0; --mark:#B86A00; --mark-soft:#FBEFD9;
@@ -31,6 +31,19 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{o
 .rail a.navc,.rail a.navx{display:block;padding:.3rem .5rem;border-radius:4px;text-decoration:none;color:var(--ink);font-size:.86rem;line-height:1.3}
 .rail a.navc:hover,.rail a.navx:hover{background:var(--accent-soft)}
 .rail a.cur{background:var(--accent-soft);color:var(--accent)}
+.navg{display:grid;grid-template-columns:1.25rem minmax(0,1fr);align-items:start}
+.tog{width:1.25rem;height:1.6rem;padding:0;border:0;background:none;color:var(--muted);cursor:pointer;border-radius:4px}
+.tog::before{content:"";display:block;margin:auto;width:0;height:0;border-left:5px solid currentColor;border-top:4px solid transparent;border-bottom:4px solid transparent}
+.tog[aria-expanded="true"]::before{transform:rotate(90deg)}
+.tog:hover{color:var(--ink);background:var(--accent-soft)}
+.sub{grid-column:2;display:flex;flex-direction:column;gap:1px;margin:2px 0 6px;padding-left:.5rem;border-left:1px solid var(--line)}
+.sub[hidden]{display:none}
+.rail a.navm{display:block;padding:.22rem .5rem;border-radius:4px;text-decoration:none;color:var(--ink);font-size:.8rem;line-height:1.3}
+.rail a.navm:hover{background:var(--accent-soft)}
+.rail a.navc.in{color:var(--accent)}
+.mc{font:600 .72rem var(--f-mono);color:var(--muted);margin-right:.2rem}
+.rail a.cur .mc{color:var(--accent)}
+.navm.is-done::after{content:" ✓";color:var(--ok);font-weight:700}
 .rail h3{font:600 .7rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:var(--s3) 0 var(--s1)}
 #search{width:100%;padding:.45rem .6rem;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);font:inherit;font-size:.88rem}
 #results{display:flex;flex-direction:column;gap:2px}
@@ -97,9 +110,6 @@ figcaption{font:.78rem var(--f-mono);color:var(--muted);margin-top:var(--s2)}
 .answer summary{font-weight:600;color:var(--ink);font-size:1rem}
 .done{margin-top:var(--s6);font-weight:600}
 .pager{display:flex;flex-wrap:wrap;gap:var(--s4);justify-content:space-between;border-top:1px solid var(--line);padding-top:var(--s4);margin-top:var(--s4)}
-.timeline{display:flex;gap:3px;height:2.2rem;margin:var(--s4) 0;max-width:46rem}
-.clip{display:flex;align-items:center;justify-content:center;min-width:2.2rem;border-radius:4px;background:var(--accent-soft);border:1px solid var(--accent);text-decoration:none;color:var(--accent);font:600 .72rem var(--f-mono)}
-.clip.done{background:var(--accent);color:var(--surface)}
 .modlist{padding-left:1.2rem;display:flex;flex-direction:column;gap:var(--s2)}
 .modlist a{text-decoration:none;color:var(--ink);font-weight:600}
 .modlist a:hover{color:var(--accent)}
@@ -123,7 +133,7 @@ figcaption{font:.78rem var(--f-mono);color:var(--muted);margin-top:var(--s2)}
   .menu{display:inline-block;font:500 .8rem var(--f-mono);padding:.35rem .7rem;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);cursor:pointer;align-self:flex-start}
   .theme{margin-top:var(--s3)}
 }
-@media (prefers-reduced-motion:no-preference){.clip,.card,.chip{transition:background .15s,border-color .15s}}
+@media (prefers-reduced-motion:no-preference){.card,.chip,.tog::before{transition:background .15s,border-color .15s,transform .15s}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="d-head" d="M0,0 L10,5 L0,10 z"/></marker></defs></svg>
@@ -168,17 +178,29 @@ figcaption{font:.78rem var(--f-mono);color:var(--muted);margin-top:var(--s2)}
     if(h.indexOf('g-')===0){target='glossary';anchor=h}
     if(!document.getElementById(target)) target='home';
     pages.forEach(function(p){p.hidden = p.id!==target});
+    var course = INDEX[target] ? INDEX[target].c : target;
     document.querySelectorAll('.rail a').forEach(function(a){
       var id=a.getAttribute('href').slice(1);
-      var cur = id===target || (INDEX[target] && INDEX[target].c===id);
-      a.classList.toggle('cur', cur);
+      a.classList.toggle('cur', id===target);
+      a.classList.toggle('in', a.classList.contains('navc') && INDEX[target] && INDEX[target].c===id);
+      if(id===target) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');
     });
+    // open the current course's module list; leave the others as the reader set them
+    var g = document.querySelector('.navg[data-course="'+course+'"]');
+    if(g) setOpen(g, true);
     if(anchor){var el=document.getElementById(anchor); if(el) el.scrollIntoView();}
     else window.scrollTo(0,0);
     var t = document.getElementById(target).querySelector('h1');
     document.title = (t? t.textContent.replace(/\s+/g,' ').trim()+' · ' : '') + 'AI-Native Video Program';
     document.getElementById('rail').classList.remove('open');
   }
+  function setOpen(g, open){
+    g.querySelector('.tog').setAttribute('aria-expanded', open);
+    g.querySelector('.sub').hidden = !open;
+  }
+  document.querySelectorAll('.navg .tog').forEach(function(b){
+    b.addEventListener('click', function(){ var g=b.closest('.navg'); setOpen(g, b.getAttribute('aria-expanded')!=='true'); });
+  });
   window.addEventListener('hashchange', show); show();
 
   // quizzes
@@ -207,7 +229,7 @@ figcaption{font:.78rem var(--f-mono);color:var(--muted);margin-top:var(--s2)}
       var id=b.dataset.id, on = store('done:'+id)==='1';
       b.checked = on;
       var c = INDEX[id].c; counts[c]=counts[c]||[0,0]; counts[c][1]++; if(on) counts[c][0]++;
-      document.querySelectorAll('.clip[data-id="'+id+'"]').forEach(function(cl){cl.classList.toggle('done',on)});
+      document.querySelectorAll('.navm[data-id="'+id+'"]').forEach(function(a){a.classList.toggle('is-done',on)});
     });
     document.querySelectorAll('.prog').forEach(function(p){var c=counts[p.dataset.course]; if(c&&c[0]) p.textContent=c[0]+' of '+c[1]+' modules complete'});
   }

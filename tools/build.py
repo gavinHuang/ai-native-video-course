@@ -415,12 +415,18 @@ def render_module(c, m, prev_id, next_id):
     return "\n".join(out)
 
 
-def timeline(c):
-    total = sum(float(m.get("hours", 1)) for m in c["modules"]) or 1
-    segs = "".join(
-        f'<a class="clip" href="#{m["id"]}" data-id="{m["id"]}" style="flex:{float(m.get("hours",1))}" title="{html.escape(m["title"])}">'
-        f'<span>{m["code"].split("·")[1]}</span></a>' for m in c["modules"])
-    return f'<div class="timeline" aria-label="Modules">{segs}</div>'
+def render_nav(courses):
+    """Left rail: each course with a collapsible list of its modules."""
+    out = []
+    for c in courses:
+        cid = c["code"].lower()
+        mods = "".join(f'<a href="#{m["id"]}" class="navm" data-id="{m["id"]}"><span class="mc">{m["code"].split("·")[1]}</span> {html.escape(m["title"])}</a>'
+                       for m in c["modules"])
+        out.append(f'<div class="navg" data-course="{cid}">'
+                   f'<button type="button" class="tog" aria-expanded="false" aria-controls="sub-{cid}" aria-label="Modules of {c["code"]}"></button>'
+                   f'<a href="#{cid}" class="navc"><span class="tc">{c["code"]}</span> {html.escape(c["title"])}</a>'
+                   f'<div class="sub" id="sub-{cid}" hidden>{mods}</div></div>')
+    return "".join(out)
 
 
 def render_course(c):
@@ -428,7 +434,6 @@ def render_course(c):
     out.append(f'<p class="eyebrow"><a href="#home">Program</a> · Level {c["level"]}</p>')
     out.append(f'<h1><span class="tc">{c["code"]}</span> {html.escape(c["title"])}</h1>')
     out.append(f'<p class="meta">{c["hours"]} h · Prerequisites: {html.escape(c.get("prereq", "none"))}</p>')
-    out.append(timeline(c))
     out.append(f'<section class="block">{md(c["body"])}</section>')
     out.append('<section class="block"><h2>Course outcomes</h2><ol>' + "".join(f"<li>{html.escape(o)}</li>" for o in c["outcomes"]) + "</ol></section>")
     out.append('<section class="block"><h2>Modules</h2><ol class="modlist">')
@@ -493,7 +498,7 @@ def build():
         p = CONTENT / f"{extra}.md"
         if p.exists():
             pages.append(render_page(extra, extra, fill_totals(p.read_text(), courses)))
-    nav = "".join(f'<a href="#{c["code"].lower()}" class="navc"><span class="tc">{c["code"]}</span> {html.escape(c["title"])}</a>' for c in courses)
+    nav = render_nav(courses)
     shell = (ROOT / "tools" / "shell.html").read_text()
     index = {m["id"]: {"c": c["code"].lower(), "t": m["title"]} for c in courses for m in c["modules"]}
     page = (shell.replace("{{NAV}}", nav)

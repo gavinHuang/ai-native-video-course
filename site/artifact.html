@@ -2,7 +2,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap">
 <style>
-/* Layout: edit-suite — fixed course rail on the left, one reading column, modules shown as clips on a timeline */
+/* Layout: edit-suite — fixed course rail on the left (courses with collapsible module lists), one reading column */
 :root{
   --bg:#F4F6F8; --surface:#FFFFFF; --ink:#151A22; --muted:#596273; --line:#D8DDE5;
   --accent:#0E7A72; --accent-soft:#E2F2F0; --mark:#B86A00; --mark-soft:#FBEFD9;
@@ -31,6 +31,19 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{o
 .rail a.navc,.rail a.navx{display:block;padding:.3rem .5rem;border-radius:4px;text-decoration:none;color:var(--ink);font-size:.86rem;line-height:1.3}
 .rail a.navc:hover,.rail a.navx:hover{background:var(--accent-soft)}
 .rail a.cur{background:var(--accent-soft);color:var(--accent)}
+.navg{display:grid;grid-template-columns:1.25rem minmax(0,1fr);align-items:start}
+.tog{width:1.25rem;height:1.6rem;padding:0;border:0;background:none;color:var(--muted);cursor:pointer;border-radius:4px}
+.tog::before{content:"";display:block;margin:auto;width:0;height:0;border-left:5px solid currentColor;border-top:4px solid transparent;border-bottom:4px solid transparent}
+.tog[aria-expanded="true"]::before{transform:rotate(90deg)}
+.tog:hover{color:var(--ink);background:var(--accent-soft)}
+.sub{grid-column:2;display:flex;flex-direction:column;gap:1px;margin:2px 0 6px;padding-left:.5rem;border-left:1px solid var(--line)}
+.sub[hidden]{display:none}
+.rail a.navm{display:block;padding:.22rem .5rem;border-radius:4px;text-decoration:none;color:var(--ink);font-size:.8rem;line-height:1.3}
+.rail a.navm:hover{background:var(--accent-soft)}
+.rail a.navc.in{color:var(--accent)}
+.mc{font:600 .72rem var(--f-mono);color:var(--muted);margin-right:.2rem}
+.rail a.cur .mc{color:var(--accent)}
+.navm.is-done::after{content:" ✓";color:var(--ok);font-weight:700}
 .rail h3{font:600 .7rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:var(--s3) 0 var(--s1)}
 #search{width:100%;padding:.45rem .6rem;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);font:inherit;font-size:.88rem}
 #results{display:flex;flex-direction:column;gap:2px}
@@ -97,9 +110,6 @@ figcaption{font:.78rem var(--f-mono);color:var(--muted);margin-top:var(--s2)}
 .answer summary{font-weight:600;color:var(--ink);font-size:1rem}
 .done{margin-top:var(--s6);font-weight:600}
 .pager{display:flex;flex-wrap:wrap;gap:var(--s4);justify-content:space-between;border-top:1px solid var(--line);padding-top:var(--s4);margin-top:var(--s4)}
-.timeline{display:flex;gap:3px;height:2.2rem;margin:var(--s4) 0;max-width:46rem}
-.clip{display:flex;align-items:center;justify-content:center;min-width:2.2rem;border-radius:4px;background:var(--accent-soft);border:1px solid var(--accent);text-decoration:none;color:var(--accent);font:600 .72rem var(--f-mono)}
-.clip.done{background:var(--accent);color:var(--surface)}
 .modlist{padding-left:1.2rem;display:flex;flex-direction:column;gap:var(--s2)}
 .modlist a{text-decoration:none;color:var(--ink);font-weight:600}
 .modlist a:hover{color:var(--accent)}
@@ -123,7 +133,7 @@ figcaption{font:.78rem var(--f-mono);color:var(--muted);margin-top:var(--s2)}
   .menu{display:inline-block;font:500 .8rem var(--f-mono);padding:.35rem .7rem;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);cursor:pointer;align-self:flex-start}
   .theme{margin-top:var(--s3)}
 }
-@media (prefers-reduced-motion:no-preference){.clip,.card,.chip{transition:background .15s,border-color .15s}}
+@media (prefers-reduced-motion:no-preference){.card,.chip,.tog::before{transition:background .15s,border-color .15s,transform .15s}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="d-head" d="M0,0 L10,5 L0,10 z"/></marker></defs></svg>
@@ -144,7 +154,7 @@ figcaption{font:.78rem var(--f-mono);color:var(--muted);margin-top:var(--s2)}
         <a class="navx" href="#glossary">Glossary</a>
       </nav>
       <h3>Courses</h3>
-      <nav><a href="#c01" class="navc"><span class="tc">C01</span> Generative Model Internals</a><a href="#c02" class="navc"><span class="tc">C02</span> Screen Language for AI Directors</a><a href="#c03" class="navc"><span class="tc">C03</span> LLMs as Creative and Production Engine</a><a href="#c04" class="navc"><span class="tc">C04</span> Image Generation and Look Development</a><a href="#c05" class="navc"><span class="tc">C05</span> Video Generation: Directing the Model</a><a href="#c06" class="navc"><span class="tc">C06</span> Audio Generation: Voice, Music, Sound</a><a href="#c07" class="navc"><span class="tc">C07</span> World Models, 3D, and Virtual Production</a><a href="#c08" class="navc"><span class="tc">C08</span> Agentic Editing</a><a href="#c09" class="navc"><span class="tc">C09</span> AI Finishing: Image</a><a href="#c10" class="navc"><span class="tc">C10</span> AI Finishing: Sound</a><a href="#c11" class="navc"><span class="tc">C11</span> Node Pipelines (ComfyUI)</a><a href="#c12" class="navc"><span class="tc">C12</span> Orchestration and Agents</a><a href="#c13" class="navc"><span class="tc">C13</span> Infrastructure for Generative Video</a><a href="#c14" class="navc"><span class="tc">C14</span> Fine-Tuning and Self-Hosting</a><a href="#c15" class="navc"><span class="tc">C15</span> Video at Scale</a><a href="#c16" class="navc"><span class="tc">C16</span> Law, Provenance, and Trust</a><a href="#c17" class="navc"><span class="tc">C17</span> Frontier and Research Practice</a><a href="#c18" class="navc"><span class="tc">C18</span> Capstone Production</a></nav>
+      <nav><div class="navg" data-course="c01"><button type="button" class="tog" aria-expanded="false" aria-controls="sub-c01" aria-label="Modules of C01"></button><a href="#c01" class="navc"><span class="tc">C01</span> Generative Model Internals</a><div class="sub" id="sub-c01" hidden><a href="#c01-m01" class="navm" data-id="c01-m01"><span class="mc">M01</span> From data to model</a><a href="#c01-m02" class="navm" data-id="c01-m02"><span class="mc">M02</span> Tokens, embeddings, and attention</a><a href="#c01-m03" class="navm" data-id="c01-m03"><span class="mc">M03</span> Latent space, diffusion, and flow matching</a><a href="#c01-m04" class="navm" data-id="c01-m04"><span class="mc">M04</span> Diffusion transformers for video and audio</a><a href="#c01-m05" class="navm" data-id="c01-m05"><span class="mc">M05</span> Conditioning, guidance, and control</a><a href="#c01-m06" class="navm" data-id="c01-m06"><span class="mc">M06</span> Small and fast models - quantization, distillation, LoRA</a><a href="#c01-m07" class="navm" data-id="c01-m07"><span class="mc">M07</span> Evaluate models - arenas, benchmarks, your own eval set</a></div></div><div class="navg" data-course="c02"><button type="button" class="tog" aria-expanded="false" aria-controls="sub-c02" aria-label="Modules of C02"></button><a href="#c02" class="navc"><span class="tc">C02</span> Screen Language for AI Directors</a><div class="sub" id="sub-c02" hidden><a href="#c02-m01" class="navm" data-id="c02-m01"><span class="mc">M01</span> Shot sizes, angles, and composition</a><a href="#c02-m02" class="navm" data-id="c02-m02"><span class="mc">M02</span> Lens language and camera movement</a><a href="#c02-m03" class="navm" data-id="c02-m03"><span class="mc">M03</span> Light and color language</a><a href="#c02-m04" class="navm" data-id="c02-m04"><span class="mc">M04</span> Continuity and cutting</a><a href="#c02-m05" class="navm" data-id="c02-m05"><span class="mc">M05</span> Story structure for short formats</a><a href="#c02-m06" class="navm" data-id="c02-m06"><span class="mc">M06</span> Write the shot as a prompt</a></div></div><div class="navg" data-course="c03"><button type="button" class="tog" aria-expanded="false" aria-controls="sub-c03" aria-label="Modules of C03"></button><a href="#c03" class="navc"><span class="tc">C03</span> LLMs as Creative and Production Engine</a><div class="sub" id="sub-c03" hidden><a href="#c03-m01" class="navm" data-id="c03-m01"><span class="mc">M01</span> Context engineering and structured output</a><a href="#c03-m02" class="navm" data-id="c03-m02"><span class="mc">M02</span> Brief to treatment to script to prompts</a><a href="#c03-m03" class="navm" data-id="c03-m03"><span class="mc">M03</span> Critique loops and LLM as judge</a><a href="#c03-m04" class="navm" data-id="c03-m04"><span class="mc">M04</span> Agents and tool use</a><a href="#c03-m05" class="navm" data-id="c03-m05"><span class="mc">M05</span> The Model Context Protocol (MCP)</a><a href="#c03-m06" class="navm" data-id="c03-m06"><span class="mc">M06</span> Agentic coding tools for media work</a></div></div><div class="navg" data-course="c04"><button type="button" class="tog" aria-expanded="false" aria-controls="sub-c04" aria-label="Modules of C04"></button><a href="#c04" class="navc"><span class="tc">C04</span> Image Generation and Look Development</a><div class="sub" id="sub-c04" hidden><a href="#c04-m01" class="navm" data-id="c04-m01"><span class="mc">M01</span> Prompt and reference control for images</a><a href="#c04-m02" class="navm" data-id="c04-m02"><span class="mc">M02</span> Instruction editing, inpainting, outpainting, upscaling</a><a href="#c04-m03" class="navm" data-id="c04-m03"><span class="mc">M03</span> Character, product, and environment sheets</a><a href="#c04-m04" class="navm" data-id="c04-m04"><span class="mc">M04</span> Look bible, key frames, and storyboards</a></div></div><div class="navg" data-course="c05"><button type="button" class="tog" aria-expanded="false" aria-controls="sub-c05" aria-label="Modules of C05"></button><a href="#c05" class="navc"><span class="tc">C05</span> Video Generation: Directing the Model</a><div class="sub" id="sub-c05" hidden><a href="#c05-m01" class="navm" data-id="c05-m01"><span class="mc">M01</span> Generation modes and when to use each</a><a href="#c05-m02" class="navm" data-id="c05-m02"><span class="mc">M02</span> Camera, motion, and first/last-frame control</a><a href="#c05-m03" class="navm" data-id="c05-m03"><span class="mc">M03</span> Multi-shot sequences and consistency</a><a href="#c05-m04" class="navm" data-id="c05-m04"><span class="mc">M04</span> Native audio and dialogue in video models</a><a href="#c05-m05" class="navm" data-id="c05-m05"><span class="mc">M05</span> Editing video with AI models</a><a href="#c05-m06" class="navm" data-id="c05-m06"><span class="mc">M06</span> Coverage, selects, and budgets</a></div></div><div class="navg" data-course="c06"><button type="button" class="tog" aria-expanded="false" aria-controls="sub-c06" aria-label="Modules of C06"></button><a href="#c06" class="navc"><span class="tc">C06</span> Audio Generation: Voice, Music, Sound</a><div class="sub" id="sub-c06" hidden><a href="#c06-m01" class="navm" data-id="c06-m01"><span class="mc">M01</span> Synthetic voice - design, direction, cloning</a><a href="#c06-m02" class="navm" data-id="c06-m02"><span class="mc">M02</span> Lip sync, avatars, and dubbing</a><a href="#c06-m03" class="navm" data-id="c06-m03"><span class="mc">M03</span> Music generation and licenses</a><a href="#c06-m04" class="navm" data-id="c06-m04"><span class="mc">M04</span> Sound effects, ambience, separation, and cleanup</a></div></div><div class="navg" data-course="c07"><button type="button" class="tog" aria-expanded="false" aria-controls="sub-c07" aria-label="Modules of C07"></button><a href="#c07" class="navc"><span class="tc">C07</span> World Models, 3D, and Virtual Production</a><div class="sub" id="sub-c07" hidden><a href="#c07-m01" class="navm" data-id="c07-m01"><span class="mc">M01</span> 3D representations - mesh, NeRF, Gaussian splats</a><a href="#c07-m02" class="navm" data-id="c07-m02"><span class="mc">M02</span> Generated worlds and interactive world models</a><a href="#c07-m03" class="navm" data-id="c07-m03"><span class="mc">M03</span> 3D layout for exact camera, and real-time engines</a></div></div><div class="navg" data-course="c08"><button type="button" class="tog" aria-expanded="false" aria-controls="sub-c08" aria-label="Modules of C08"></button><a href="#c08" class="navc"><span class="tc">C08</span> Agentic Editing</a><div class="sub" id="sub-c08" hidden><a href="#c08-m01" class="navm" data-id="c08-m01"><span class="mc">M01</span> NLE concepts for engineers</a><a href="#c08-m02" class="navm" data-id="c08-m02"><span class="mc">M02</span> Transcript-based and script-based assembly</a><a href="#c08-m03" class="navm" data-id="c08-m03"><span class="mc">M03</span> Agents in the NLE through MCP</a><a href="#c08-m04" class="navm" data-id="c08-m04"><span class="mc">M04</span> Long-to-short and multi-format versions</a></div></div><div class="navg" data-course="c09"><button type="button" class="tog" aria-expanded="false" aria-controls="sub-c09" aria-label="Modules of C09"></button><a href="#c09" class="navc"><span class="tc">C09</span> AI Finishing: Image</a><div class="sub" id="sub-c09" hidden><a href="#c09-m01" class="navm" data-id="c09-m01"><span class="mc">M01</span> Color science essentials</a><a href="#c09-m02" class="navm" data-id="c09-m02"><span class="mc">M02</span> Grading with scopes and matching shots</a><a href="#c09-m03" class="navm" data-id="c09-m03"><span class="mc">M03</span> AI masks, relighting, cleanup, and compositing</a><a href="#c09-m04" class="navm" data-id="c09-m04"><span class="mc">M04</span> Upscale, interpolation, repair, delivery, and QC</a></div></div><div class="navg" data-course="c10"><button type="button" class="tog" aria-expanded="false" aria-controls="sub-c10" aria-label="Modules of C10"></button><a href="#c10" class="navc"><span class="tc">C10</span> AI Finishing: Sound</a><div class="sub" id="sub-c10" hidden><a href="#c10-m01" class="navm" data-id="c10-m01"><span class="mc">M01</span> Dialogue edit and sound design</a><a href="#c10-m02" class="navm" data-id="c10-m02"><span class="mc">M02</span> Mix, loudness, and audio deliverables</a></div></div><div class="navg" data-course="c11"><button type="button" class="tog" aria-expanded="false" aria-controls="sub-c11" aria-label="Modules of C11"></button><a href="#c11" class="navc"><span class="tc">C11</span> Node Pipelines (ComfyUI)</a><div class="sub" id="sub-c11" hidden><a href="#c11-m01" class="navm" data-id="c11-m01"><span class="mc">M01</span> ComfyUI graph model, install, and model management</a><a href="#c11-m02" class="navm" data-id="c11-m02"><span class="mc">M02</span> Image and video graphs with control</a><a href="#c11-m03" class="navm" data-id="c11-m03"><span class="mc">M03</span> End-to-end character pipeline</a><a href="#c11-m04" class="navm" data-id="c11-m04"><span class="mc">M04</span> Headless ComfyUI - API, MCP, and versioning</a></div></div><div class="navg" data-course="c12"><button type="button" class="tog" aria-expanded="false" aria-controls="sub-c12" aria-label="Modules of C12"></button><a href="#c12" class="navc"><span class="tc">C12</span> Orchestration and Agents</a><div class="sub" id="sub-c12" hidden><a href="#c12-m01" class="navm" data-id="c12-m01"><span class="mc">M01</span> Model APIs - async jobs, queues, retries, webhooks</a><a href="#c12-m02" class="navm" data-id="c12-m02"><span class="mc">M02</span> ffmpeg, Whisper, and media utilities as pipeline stages</a><a href="#c12-m03" class="navm" data-id="c12-m03"><span class="mc">M03</span> Build your own MCP server for media</a><a href="#c12-m04" class="navm" data-id="c12-m04"><span class="mc">M04</span> Multi-agent production and automated quality gates</a></div></div><div class="navg" data-course="c13"><button type="button" class="tog" aria-expanded="false" aria-controls="sub-c13" aria-label="Modules of C13"></button><a href="#c13" class="navc"><span class="tc">C13</span> Infrastructure for Generative Video</a><div class="sub" id="sub-c13" hidden><a href="#c13-m01" class="navm" data-id="c13-m01"><span class="mc">M01</span> GPU fundamentals for generative video</a><a href="#c13-m02" class="navm" data-id="c13-m02"><span class="mc">M02</span> Workstation, storage, and network design</a><a href="#c13-m03" class="navm" data-id="c13-m03"><span class="mc">M03</span> Cloud GPU - rental, serverless, and per-output APIs</a><a href="#c13-m04" class="navm" data-id="c13-m04"><span class="mc">M04</span> Serving open models - containers, cold starts, autoscaling</a><a href="#c13-m05" class="navm" data-id="c13-m05"><span class="mc">M05</span> Cloud media services, cost control, and secure operations</a></div></div><div class="navg" data-course="c14"><button type="button" class="tog" aria-expanded="false" aria-controls="sub-c14" aria-label="Modules of C14"></button><a href="#c14" class="navc"><span class="tc">C14</span> Fine-Tuning and Self-Hosting</a><div class="sub" id="sub-c14" hidden><a href="#c14-m01" class="navm" data-id="c14-m01"><span class="mc">M01</span> Datasets - collect, clean, caption, consent</a><a href="#c14-m02" class="navm" data-id="c14-m02"><span class="mc">M02</span> Train image and video LoRAs</a><a href="#c14-m03" class="navm" data-id="c14-m03"><span class="mc">M03</span> Evaluate, quantize, and serve adapted models</a></div></div><div class="navg" data-course="c15"><button type="button" class="tog" aria-expanded="false" aria-controls="sub-c15" aria-label="Modules of C15"></button><a href="#c15" class="navc"><span class="tc">C15</span> Video at Scale</a><div class="sub" id="sub-c15" hidden><a href="#c15-m01" class="navm" data-id="c15-m01"><span class="mc">M01</span> Templates and data-driven variants</a><a href="#c15-m02" class="navm" data-id="c15-m02"><span class="mc">M02</span> Localization pipeline at scale</a><a href="#c15-m03" class="navm" data-id="c15-m03"><span class="mc">M03</span> Publishing, platform specs, and the analytics loop</a></div></div><div class="navg" data-course="c16"><button type="button" class="tog" aria-expanded="false" aria-controls="sub-c16" aria-label="Modules of C16"></button><a href="#c16" class="navc"><span class="tc">C16</span> Law, Provenance, and Trust</a><div class="sub" id="sub-c16" hidden><a href="#c16-m01" class="navm" data-id="c16-m01"><span class="mc">M01</span> Copyright and licenses in AI production</a><a href="#c16-m02" class="navm" data-id="c16-m02"><span class="mc">M02</span> Likeness, voice, and consent</a><a href="#c16-m03" class="navm" data-id="c16-m03"><span class="mc">M03</span> Disclosure rules, C2PA, and watermarks</a><a href="#c16-m04" class="navm" data-id="c16-m04"><span class="mc">M04</span> Harms, misuse, bias, and professional responsibility</a></div></div><div class="navg" data-course="c17"><button type="button" class="tog" aria-expanded="false" aria-controls="sub-c17" aria-label="Modules of C17"></button><a href="#c17" class="navc"><span class="tc">C17</span> Frontier and Research Practice</a><div class="sub" id="sub-c17" hidden><a href="#c17-m01" class="navm" data-id="c17-m01"><span class="mc">M01</span> Read papers, model cards, and technical reports</a><a href="#c17-m02" class="navm" data-id="c17-m02"><span class="mc">M02</span> Test a new model in one day</a><a href="#c17-m03" class="navm" data-id="c17-m03"><span class="mc">M03</span> Research directions 2026 and your next step</a></div></div><div class="navg" data-course="c18"><button type="button" class="tog" aria-expanded="false" aria-controls="sub-c18" aria-label="Modules of C18"></button><a href="#c18" class="navc"><span class="tc">C18</span> Capstone Production</a><div class="sub" id="sub-c18" hidden><a href="#c18-m01" class="navm" data-id="c18-m01"><span class="mc">M01</span> Brief, plan, and pipeline design</a><a href="#c18-m02" class="navm" data-id="c18-m02"><span class="mc">M02</span> Produce, deliver, document, and assess</a></div></div></nav>
       <div class="theme" role="group" aria-label="Theme">
         <button type="button" data-t="light" aria-pressed="false">Light</button>
         <button type="button" data-t="system" aria-pressed="true">System</button>
@@ -198,7 +208,6 @@ figcaption{font:.78rem var(--f-mono);color:var(--muted);margin-top:var(--s2)}
 <p class="eyebrow"><a href="#home">Program</a> · Level 1</p>
 <h1><span class="tc">C01</span> Generative Model Internals</h1>
 <p class="meta">60 h · Prerequisites: none (entry knowledge only)</p>
-<div class="timeline" aria-label="Modules"><a class="clip" href="#c01-m01" data-id="c01-m01" style="flex:7.0" title="From data to model"><span>M01</span></a><a class="clip" href="#c01-m02" data-id="c01-m02" style="flex:9.0" title="Tokens, embeddings, and attention"><span>M02</span></a><a class="clip" href="#c01-m03" data-id="c01-m03" style="flex:10.0" title="Latent space, diffusion, and flow matching"><span>M03</span></a><a class="clip" href="#c01-m04" data-id="c01-m04" style="flex:9.0" title="Diffusion transformers for video and audio"><span>M04</span></a><a class="clip" href="#c01-m05" data-id="c01-m05" style="flex:9.0" title="Conditioning, guidance, and control"><span>M05</span></a><a class="clip" href="#c01-m06" data-id="c01-m06" style="flex:8.0" title="Small and fast models - quantization, distillation, LoRA"><span>M06</span></a><a class="clip" href="#c01-m07" data-id="c01-m07" style="flex:8.0" title="Evaluate models - arenas, benchmarks, your own eval set"><span>M07</span></a></div>
 <section class="block"><h2>About this course</h2>
 <p>You will use generative models in every other course. This course shows you what happens inside them. You do not need to train a large model. You need a correct mental model, so that you can predict what a model can do, why it fails, and which setting to change.</p>
 <p>The labs use Python notebooks. They run on a laptop or in Google Colab. Some labs call hosted APIs.</p>
@@ -1529,7 +1538,6 @@ json.dump(key, open(&quot;key.json&quot;, &quot;w&quot;), indent=2)
 <p class="eyebrow"><a href="#home">Program</a> · Level 1</p>
 <h1><span class="tc">C02</span> Screen Language for AI Directors</h1>
 <p class="meta">50 h · Prerequisites: none</p>
-<div class="timeline" aria-label="Modules"><a class="clip" href="#c02-m01" data-id="c02-m01" style="flex:8.0" title="Shot sizes, angles, and composition"><span>M01</span></a><a class="clip" href="#c02-m02" data-id="c02-m02" style="flex:8.0" title="Lens language and camera movement"><span>M02</span></a><a class="clip" href="#c02-m03" data-id="c02-m03" style="flex:8.0" title="Light and color language"><span>M03</span></a><a class="clip" href="#c02-m04" data-id="c02-m04" style="flex:8.0" title="Continuity and cutting"><span>M04</span></a><a class="clip" href="#c02-m05" data-id="c02-m05" style="flex:9.0" title="Story structure for short formats"><span>M05</span></a><a class="clip" href="#c02-m06" data-id="c02-m06" style="flex:9.0" title="Write the shot as a prompt"><span>M06</span></a></div>
 <section class="block"><h2>About this course</h2>
 <p>A model makes exactly what you describe, and invents the rest. A director who knows screen language describes more, so the model invents less. This course gives you the vocabulary of film and the reasons behind it. You will use this vocabulary in every prompt, every shot list, and every review.</p>
 <p>There is no camera work in this course. You analyse existing films, and you make the shots with image and video models.</p></section>
@@ -2628,7 +2636,6 @@ Test each claim on your eval set before you write it in a prompt adapter.</li>
 <p class="eyebrow"><a href="#home">Program</a> · Level 1</p>
 <h1><span class="tc">C03</span> LLMs as Creative and Production Engine</h1>
 <p class="meta">50 h · Prerequisites: C02 recommended</p>
-<div class="timeline" aria-label="Modules"><a class="clip" href="#c03-m01" data-id="c03-m01" style="flex:8.0" title="Context engineering and structured output"><span>M01</span></a><a class="clip" href="#c03-m02" data-id="c03-m02" style="flex:9.0" title="Brief to treatment to script to prompts"><span>M02</span></a><a class="clip" href="#c03-m03" data-id="c03-m03" style="flex:7.0" title="Critique loops and LLM as judge"><span>M03</span></a><a class="clip" href="#c03-m04" data-id="c03-m04" style="flex:8.0" title="Agents and tool use"><span>M04</span></a><a class="clip" href="#c03-m05" data-id="c03-m05" style="flex:9.0" title="The Model Context Protocol (MCP)"><span>M05</span></a><a class="clip" href="#c03-m06" data-id="c03-m06" style="flex:9.0" title="Agentic coding tools for media work"><span>M06</span></a></div>
 <section class="block"><h2>About this course</h2>
 <p>In an AI-native production, the LLM is the planner, writer, critic, and operator. It turns a brief into structured data that every other tool can read. It also operates tools through MCP. This course teaches you to use LLMs as an engineer: with schemas, validation, tests, and clear responsibility for the human.</p>
 <p><strong>Starter tools for this course</strong> (in the <a href="starter.zip">starter kit</a>; tested on 2026-10-04):</p>
@@ -3699,7 +3706,6 @@ npx @modelcontextprotocol/inspector python starter/solutions/C03-M05/media_mcp.p
 <p class="eyebrow"><a href="#home">Program</a> · Level 2</p>
 <h1><span class="tc">C04</span> Image Generation and Look Development</h1>
 <p class="meta">50 h · Prerequisites: C01, C02</p>
-<div class="timeline" aria-label="Modules"><a class="clip" href="#c04-m01" data-id="c04-m01" style="flex:10.0" title="Prompt and reference control for images"><span>M01</span></a><a class="clip" href="#c04-m02" data-id="c04-m02" style="flex:9.0" title="Instruction editing, inpainting, outpainting, upscaling"><span>M02</span></a><a class="clip" href="#c04-m03" data-id="c04-m03" style="flex:11.0" title="Character, product, and environment sheets"><span>M03</span></a><a class="clip" href="#c04-m04" data-id="c04-m04" style="flex:20.0" title="Look bible, key frames, and storyboards"><span>M04</span></a></div>
 <section class="block"><h2>About this course</h2>
 <p>In AI-native video, most shots start as an image. The image fixes identity, composition, and look before you pay for motion. This course teaches you to make those images on purpose, and to make them the same across a whole project.</p>
 <p>Current tools (as of 2026-10): GPT Image 2, Nano Banana Pro / 2, FLUX.2 (open weights), Midjourney V8.x, Kling Image 3.0, Seedream. See the tool landscape page.</p>
@@ -4724,7 +4730,6 @@ S09,c,S09_c.png,5,4,4,3,FLARE,ok,fix,mask-remove flare on lamp
 <p class="eyebrow"><a href="#home">Program</a> · Level 2</p>
 <h1><span class="tc">C05</span> Video Generation: Directing the Model</h1>
 <p class="meta">90 h · Prerequisites: C01, C02, C04</p>
-<div class="timeline" aria-label="Modules"><a class="clip" href="#c05-m01" data-id="c05-m01" style="flex:12.0" title="Generation modes and when to use each"><span>M01</span></a><a class="clip" href="#c05-m02" data-id="c05-m02" style="flex:16.0" title="Camera, motion, and first/last-frame control"><span>M02</span></a><a class="clip" href="#c05-m03" data-id="c05-m03" style="flex:16.0" title="Multi-shot sequences and consistency"><span>M03</span></a><a class="clip" href="#c05-m04" data-id="c05-m04" style="flex:12.0" title="Native audio and dialogue in video models"><span>M04</span></a><a class="clip" href="#c05-m05" data-id="c05-m05" style="flex:14.0" title="Editing video with AI models"><span>M05</span></a><a class="clip" href="#c05-m06" data-id="c05-m06" style="flex:20.0" title="Coverage, selects, and budgets"><span>M06</span></a></div>
 <section class="block"><h2>About this course</h2>
 <p>This is the core craft of the program. You learn to direct a video model like a crew: a clear plan, exact instructions, references, and a review of every take.</p>
 <p>Current tools (as of 2026-10): Kling 3.0 / 3.0 Omni, Seedance 2.5, Veo 3.1 + Flow, Gemini Omni Flash, Runway Gen-4.5 + Aleph, Luma Ray3; open: Wan 2.7, LTX-2.5, HunyuanVideo 1.5. Note: the Sora 2 API was removed on 2026-09-24.</p>
@@ -6332,7 +6337,6 @@ python starter/tools/takes.py selects &gt; selects.csv    # for the editor
 <p class="eyebrow"><a href="#home">Program</a> · Level 2</p>
 <h1><span class="tc">C06</span> Audio Generation: Voice, Music, Sound</h1>
 <p class="meta">50 h · Prerequisites: C01</p>
-<div class="timeline" aria-label="Modules"><a class="clip" href="#c06-m01" data-id="c06-m01" style="flex:14.0" title="Synthetic voice - design, direction, cloning"><span>M01</span></a><a class="clip" href="#c06-m02" data-id="c06-m02" style="flex:12.0" title="Lip sync, avatars, and dubbing"><span>M02</span></a><a class="clip" href="#c06-m03" data-id="c06-m03" style="flex:12.0" title="Music generation and licenses"><span>M03</span></a><a class="clip" href="#c06-m04" data-id="c06-m04" style="flex:12.0" title="Sound effects, ambience, separation, and cleanup"><span>M04</span></a></div>
 <section class="block"><h2>About this course</h2>
 <p>Sound is half of the experience. AI now makes voices, music, and effects at production quality. This course teaches you to use these tools well and legally. C10 then teaches you to mix the result.</p>
 <p>Current tools (as of 2026-10): ElevenLabs (TTS, cloning, dubbing, music v2.5, avatars), HeyGen, Synthesia, Suno v6; open: IndexTTS-2, CosyVoice 3, Qwen3-TTS; Demucs for stems.</p>
@@ -7404,7 +7408,6 @@ python starter/tools/loop_audio.py rain_loop.wav --check
 <p class="eyebrow"><a href="#home">Program</a> · Level 2</p>
 <h1><span class="tc">C07</span> World Models, 3D, and Virtual Production</h1>
 <p class="meta">40 h · Prerequisites: C01, C05</p>
-<div class="timeline" aria-label="Modules"><a class="clip" href="#c07-m01" data-id="c07-m01" style="flex:10.0" title="3D representations - mesh, NeRF, Gaussian splats"><span>M01</span></a><a class="clip" href="#c07-m02" data-id="c07-m02" style="flex:10.0" title="Generated worlds and interactive world models"><span>M02</span></a><a class="clip" href="#c07-m03" data-id="c07-m03" style="flex:20.0" title="3D layout for exact camera, and real-time engines"><span>M03</span></a></div>
 <section class="block"><h2>About this course</h2>
 <p>Video models guess space. 3D tools know space. When you combine them, you get exact camera control and stable locations. World models such as Genie 3 and Marble now generate whole 3D or interactive worlds. This course shows how to use them in production today.</p>
 <p><strong>Starter tool:</strong> <code>tools/whitebox.py</code> in the <a href="starter.zip">starter kit</a> builds a white box from a JSON layout and renders depth, edge, and clay videos with a real lens (M03). It runs with Blender's Python module (<code>pip install bpy</code>, Python 3.11) without opening Blender. On 2026-10-04 it rendered 48 frames of all three passes at 640 × 352 in 25 s on a laptop CPU.</p></section>
@@ -7999,7 +8002,6 @@ python starter/tools/whitebox.py layout.json --out wb/S07/ --res 640x352
 <p class="eyebrow"><a href="#home">Program</a> · Level 3</p>
 <h1><span class="tc">C08</span> Agentic Editing</h1>
 <p class="meta">60 h · Prerequisites: C02, C03, C05</p>
-<div class="timeline" aria-label="Modules"><a class="clip" href="#c08-m01" data-id="c08-m01" style="flex:15.0" title="NLE concepts for engineers"><span>M01</span></a><a class="clip" href="#c08-m02" data-id="c08-m02" style="flex:15.0" title="Transcript-based and script-based assembly"><span>M02</span></a><a class="clip" href="#c08-m03" data-id="c08-m03" style="flex:15.0" title="Agents in the NLE through MCP"><span>M03</span></a><a class="clip" href="#c08-m04" data-id="c08-m04" style="flex:15.0" title="Long-to-short and multi-format versions"><span>M04</span></a></div>
 <section class="block"><h2>About this course</h2>
 <p>The edit is where a video becomes a story. In 2026, agents can do much of the mechanical work: organize, assemble, trim, version, and render. You stay the editor: you decide rhythm, emotion, and story. Tools: DaVinci Resolve (free; Studio 21.1 for native MCP), Adobe Premiere (Firefly AI Assistant; MCP), Final Cut Pro, Avid Media Composer, Descript, CapCut; OpenTimelineIO for exchange.</p>
 <p><strong>Starter tools for this course</strong> (in the <a href="starter.zip">starter kit</a>):</p>
@@ -8942,7 +8944,6 @@ python starter/tools/captions.py master_16x9.mp4 --transcript tr/master.json --o
 <p class="eyebrow"><a href="#home">Program</a> · Level 3</p>
 <h1><span class="tc">C09</span> AI Finishing: Image</h1>
 <p class="meta">60 h · Prerequisites: C05, C08</p>
-<div class="timeline" aria-label="Modules"><a class="clip" href="#c09-m01" data-id="c09-m01" style="flex:15.0" title="Color science essentials"><span>M01</span></a><a class="clip" href="#c09-m02" data-id="c09-m02" style="flex:15.0" title="Grading with scopes and matching shots"><span>M02</span></a><a class="clip" href="#c09-m03" data-id="c09-m03" style="flex:15.0" title="AI masks, relighting, cleanup, and compositing"><span>M03</span></a><a class="clip" href="#c09-m04" data-id="c09-m04" style="flex:15.0" title="Upscale, interpolation, repair, delivery, and QC"><span>M04</span></a></div>
 <section class="block"><h2>About this course</h2>
 <p>Generated shots come from different models, with different colors, sharpness, and frame rates. Finishing makes them one film. Tools: DaVinci Resolve (color standard; Magic Mask, Relight, Voice Isolation), After Effects, Nuke, Fusion, Topaz Video, Runway Aleph; ffmpeg for checks.</p>
 <p><strong>Starter tools for this course</strong> (in the <a href="starter.zip">starter kit</a>):</p>
@@ -9952,7 +9953,6 @@ python starter/tools/spec_check.py web_1080p.mp4 --spec starter/specs/web_1080p.
 <p class="eyebrow"><a href="#home">Program</a> · Level 3</p>
 <h1><span class="tc">C10</span> AI Finishing: Sound</h1>
 <p class="meta">40 h · Prerequisites: C06</p>
-<div class="timeline" aria-label="Modules"><a class="clip" href="#c10-m01" data-id="c10-m01" style="flex:14.0" title="Dialogue edit and sound design"><span>M01</span></a><a class="clip" href="#c10-m02" data-id="c10-m02" style="flex:26.0" title="Mix, loudness, and audio deliverables"><span>M02</span></a></div>
 <section class="block"><h2>About this course</h2>
 <p>A good mix makes generated video feel real. This course takes your dialogue, effects, ambience, and music from C06 and finishes them. Tools: Fairlight (in Resolve), Pro Tools, Reaper, Audition; iZotope RX; ffmpeg ebur128 for checks.</p>
 <p><strong>Starter tools for this course</strong> (in the <a href="starter.zip">starter kit</a>):</p>
@@ -10488,7 +10488,6 @@ python starter/tools/normalize.py mix.wav --target -23 --tp -1 --out mix_broadca
 <p class="eyebrow"><a href="#home">Program</a> · Level 4</p>
 <h1><span class="tc">C11</span> Node Pipelines (ComfyUI)</h1>
 <p class="meta">60 h · Prerequisites: C01, C04, C05 (C14 is not needed; you add a LoRA to the M03 pipeline later, in C14·M03)</p>
-<div class="timeline" aria-label="Modules"><a class="clip" href="#c11-m01" data-id="c11-m01" style="flex:12.0" title="ComfyUI graph model, install, and model management"><span>M01</span></a><a class="clip" href="#c11-m02" data-id="c11-m02" style="flex:16.0" title="Image and video graphs with control"><span>M02</span></a><a class="clip" href="#c11-m03" data-id="c11-m03" style="flex:16.0" title="End-to-end character pipeline"><span>M03</span></a><a class="clip" href="#c11-m04" data-id="c11-m04" style="flex:16.0" title="Headless ComfyUI - API, MCP, and versioning"><span>M04</span></a></div>
 <section class="block"><h2>About this course</h2>
 <p>ComfyUI is the standard node-graph tool for open generative models. It gives you control of every step, it runs on your own hardware or in the cloud, and it has an HTTP API. In this course you use it as an engineer: you read graphs node by node, measure them, and run them from code.</p>
 <p><strong>Requirement:</strong> an NVIDIA GPU with 24 GB VRAM or more (32 GB recommended), or a rented cloud GPU. The LTX workflows (06–08) need about 44 GB of weights; they run best on 48–80 GB, so rent that size for a batch day. LTX-2.5 files are gated: log in to Hugging Face, accept the license, and set <code>HF_TOKEN</code>. You can do all client and test work (M04) on a laptop with a CPU-only ComfyUI.</p>
@@ -11744,7 +11743,6 @@ Binary messages are preview images. Skip them unless you show previews.</li>
 <p class="eyebrow"><a href="#home">Program</a> · Level 4</p>
 <h1><span class="tc">C12</span> Orchestration and Agents</h1>
 <p class="meta">60 h · Prerequisites: C03, C11</p>
-<div class="timeline" aria-label="Modules"><a class="clip" href="#c12-m01" data-id="c12-m01" style="flex:14.0" title="Model APIs - async jobs, queues, retries, webhooks"><span>M01</span></a><a class="clip" href="#c12-m02" data-id="c12-m02" style="flex:10.0" title="ffmpeg, Whisper, and media utilities as pipeline stages"><span>M02</span></a><a class="clip" href="#c12-m03" data-id="c12-m03" style="flex:16.0" title="Build your own MCP server for media"><span>M03</span></a><a class="clip" href="#c12-m04" data-id="c12-m04" style="flex:20.0" title="Multi-agent production and automated quality gates"><span>M04</span></a></div>
 <section class="block"><h2>About this course</h2>
 <p>This course turns your tools into a production system. You build services that call many models, a media-tool MCP server, and a multi-agent studio with clear human approvals and automatic checks.</p>
 <p><strong>Starter code for this course</strong> (in <code>pipeline/</code> of the <a href="starter.zip">starter kit</a>; all tested on 2026-10-04):</p>
@@ -12729,7 +12727,6 @@ Week 1: US$38 generation, 2.5 h human time for 3.75 finished minutes: about 40 h
 <p class="eyebrow"><a href="#home">Program</a> · Level 4</p>
 <h1><span class="tc">C13</span> Infrastructure for Generative Video</h1>
 <p class="meta">60 h · Prerequisites: C01·M06, C11</p>
-<div class="timeline" aria-label="Modules"><a class="clip" href="#c13-m01" data-id="c13-m01" style="flex:12.0" title="GPU fundamentals for generative video"><span>M01</span></a><a class="clip" href="#c13-m02" data-id="c13-m02" style="flex:10.0" title="Workstation, storage, and network design"><span>M02</span></a><a class="clip" href="#c13-m03" data-id="c13-m03" style="flex:12.0" title="Cloud GPU - rental, serverless, and per-output APIs"><span>M03</span></a><a class="clip" href="#c13-m04" data-id="c13-m04" style="flex:14.0" title="Serving open models - containers, cold starts, autoscaling"><span>M04</span></a><a class="clip" href="#c13-m05" data-id="c13-m05" style="flex:12.0" title="Cloud media services, cost control, and secure operations"><span>M05</span></a></div>
 <section class="block"><h2>About this course</h2>
 <p>You already know cloud and containers. This course applies that knowledge to generative video, where the GPU, memory, and file sizes change every decision. Prices and products are as of October 2026; see the tool landscape.</p>
 <p><strong>Starter tools for this course</strong> (in <code>tools/</code> of the <a href="starter.zip">starter kit</a>):</p>
@@ -13913,7 +13910,6 @@ python starter/pipeline/genqueue.py status               # queued and spent jobs
 <p class="eyebrow"><a href="#home">Program</a> · Level 4</p>
 <h1><span class="tc">C14</span> Fine-Tuning and Self-Hosting</h1>
 <p class="meta">50 h · Prerequisites: C01, C11, C13</p>
-<div class="timeline" aria-label="Modules"><a class="clip" href="#c14-m01" data-id="c14-m01" style="flex:12.0" title="Datasets - collect, clean, caption, consent"><span>M01</span></a><a class="clip" href="#c14-m02" data-id="c14-m02" style="flex:16.0" title="Train image and video LoRAs"><span>M02</span></a><a class="clip" href="#c14-m03" data-id="c14-m03" style="flex:22.0" title="Evaluate, quantize, and serve adapted models"><span>M03</span></a></div>
 <section class="block"><h2>About this course</h2>
 <p>A LoRA teaches an open model your character, product, or style. It is the strongest tool for consistency, and it keeps client data in your own infrastructure. Tools: musubi-tuner (kohya-ss), AI Toolkit (ostris), Diffusers, fal LoRA trainers; open models such as FLUX.2, Wan 2.x, HunyuanVideo, LTX.</p>
 <p><strong>Starter tools for this course</strong> (in <code>tools/</code> of the <a href="starter.zip">starter kit</a>):</p>
@@ -14620,7 +14616,6 @@ python starter/tools/lora_eval.py eval/ --ref refs/CHAR-MARA/01_front.png --ref 
 <p class="eyebrow"><a href="#home">Program</a> · Level 4</p>
 <h1><span class="tc">C15</span> Video at Scale</h1>
 <p class="meta">40 h · Prerequisites: C12</p>
-<div class="timeline" aria-label="Modules"><a class="clip" href="#c15-m01" data-id="c15-m01" style="flex:14.0" title="Templates and data-driven variants"><span>M01</span></a><a class="clip" href="#c15-m02" data-id="c15-m02" style="flex:12.0" title="Localization pipeline at scale"><span>M02</span></a><a class="clip" href="#c15-m03" data-id="c15-m03" style="flex:14.0" title="Publishing, platform specs, and the analytics loop"><span>M03</span></a></div>
 <section class="block"><h2>About this course</h2>
 <p>AI-native production is not only about one film. It makes 100 versions, 20 languages, and a weekly series possible. This course builds the systems for that, and connects them to what audiences actually watch.</p>
 <p><strong>Starter code for this course</strong> (in <code>pipeline/</code> of the <a href="starter.zip">starter kit</a>; tested on 2026-10-04):</p>
@@ -15294,7 +15289,6 @@ bumps (rewatching): 41 s +2.5 S05
 <p class="eyebrow"><a href="#home">Program</a> · Level 5</p>
 <h1><span class="tc">C16</span> Law, Provenance, and Trust</h1>
 <p class="meta">40 h · Prerequisites: none (recommended after L3)</p>
-<div class="timeline" aria-label="Modules"><a class="clip" href="#c16-m01" data-id="c16-m01" style="flex:10.0" title="Copyright and licenses in AI production"><span>M01</span></a><a class="clip" href="#c16-m02" data-id="c16-m02" style="flex:8.0" title="Likeness, voice, and consent"><span>M02</span></a><a class="clip" href="#c16-m03" data-id="c16-m03" style="flex:12.0" title="Disclosure rules, C2PA, and watermarks"><span>M03</span></a><a class="clip" href="#c16-m04" data-id="c16-m04" style="flex:10.0" title="Harms, misuse, bias, and professional responsibility"><span>M04</span></a></div>
 <section class="block"><h2>About this course</h2>
 <p>This course is not legal advice. Laws differ by country and change fast. It gives you a working method: know the questions, keep records, follow platform rules, and ask a lawyer when the stakes are high. As of 2026-10, EU AI Act Article 50 transparency duties apply from 2026-08-02 (fines for breaches up to €15 million or 3 % of worldwide turnover, Article 99(4)).</p>
 <p><strong>Starter tools for this course</strong> (in the <a href="starter.zip">starter kit</a>; tested on 2026-10-04):</p>
@@ -16125,7 +16119,6 @@ Hosted APIs rarely disclose energy per output: report "not disclosed" with the o
 <p class="eyebrow"><a href="#home">Program</a> · Level 5</p>
 <h1><span class="tc">C17</span> Frontier and Research Practice</h1>
 <p class="meta">50 h · Prerequisites: C01, C05</p>
-<div class="timeline" aria-label="Modules"><a class="clip" href="#c17-m01" data-id="c17-m01" style="flex:12.0" title="Read papers, model cards, and technical reports"><span>M01</span></a><a class="clip" href="#c17-m02" data-id="c17-m02" style="flex:14.0" title="Test a new model in one day"><span>M02</span></a><a class="clip" href="#c17-m03" data-id="c17-m03" style="flex:24.0" title="Research directions 2026 and your next step"><span>M03</span></a></div>
 <section class="block"><h2>About this course</h2>
 <p>This field changes every month. The skill that lasts is the ability to learn the next thing fast and correctly. This course gives you that method, and a map of where the field is going.</p>
 <p><strong>Starter tools for this course</strong> (in the <a href="starter.zip">starter kit</a>; tested on 2026-10-04):</p>
@@ -16780,7 +16773,6 @@ done
 <p class="eyebrow"><a href="#home">Program</a> · Level 5</p>
 <h1><span class="tc">C18</span> Capstone Production</h1>
 <p class="meta">100 h · Prerequisites: all courses</p>
-<div class="timeline" aria-label="Modules"><a class="clip" href="#c18-m01" data-id="c18-m01" style="flex:30.0" title="Brief, plan, and pipeline design"><span>M01</span></a><a class="clip" href="#c18-m02" data-id="c18-m02" style="flex:70.0" title="Produce, deliver, document, and assess"><span>M02</span></a></div>
 <section class="block"><h2>About this course</h2>
 <p>The capstone shows everything you learned in one project. You choose one of three briefs (or write your own at the same level). You plan, produce, deliver, and document. The rubric is published, so you can assess yourself before you finish.</p>
 <p><strong>Starter tools for this course</strong> (in the <a href="starter.zip">starter kit</a>; tested on 2026-10-04):</p>
@@ -17959,17 +17951,29 @@ Write-up + evidence
     if(h.indexOf('g-')===0){target='glossary';anchor=h}
     if(!document.getElementById(target)) target='home';
     pages.forEach(function(p){p.hidden = p.id!==target});
+    var course = INDEX[target] ? INDEX[target].c : target;
     document.querySelectorAll('.rail a').forEach(function(a){
       var id=a.getAttribute('href').slice(1);
-      var cur = id===target || (INDEX[target] && INDEX[target].c===id);
-      a.classList.toggle('cur', cur);
+      a.classList.toggle('cur', id===target);
+      a.classList.toggle('in', a.classList.contains('navc') && INDEX[target] && INDEX[target].c===id);
+      if(id===target) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');
     });
+    // open the current course's module list; leave the others as the reader set them
+    var g = document.querySelector('.navg[data-course="'+course+'"]');
+    if(g) setOpen(g, true);
     if(anchor){var el=document.getElementById(anchor); if(el) el.scrollIntoView();}
     else window.scrollTo(0,0);
     var t = document.getElementById(target).querySelector('h1');
     document.title = (t? t.textContent.replace(/\s+/g,' ').trim()+' · ' : '') + 'AI-Native Video Program';
     document.getElementById('rail').classList.remove('open');
   }
+  function setOpen(g, open){
+    g.querySelector('.tog').setAttribute('aria-expanded', open);
+    g.querySelector('.sub').hidden = !open;
+  }
+  document.querySelectorAll('.navg .tog').forEach(function(b){
+    b.addEventListener('click', function(){ var g=b.closest('.navg'); setOpen(g, b.getAttribute('aria-expanded')!=='true'); });
+  });
   window.addEventListener('hashchange', show); show();
 
   // quizzes
@@ -17998,7 +18002,7 @@ Write-up + evidence
       var id=b.dataset.id, on = store('done:'+id)==='1';
       b.checked = on;
       var c = INDEX[id].c; counts[c]=counts[c]||[0,0]; counts[c][1]++; if(on) counts[c][0]++;
-      document.querySelectorAll('.clip[data-id="'+id+'"]').forEach(function(cl){cl.classList.toggle('done',on)});
+      document.querySelectorAll('.navm[data-id="'+id+'"]').forEach(function(a){a.classList.toggle('is-done',on)});
     });
     document.querySelectorAll('.prog').forEach(function(p){var c=counts[p.dataset.course]; if(c&&c[0]) p.textContent=c[0]+' of '+c[1]+' modules complete'});
   }
